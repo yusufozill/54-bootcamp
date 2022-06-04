@@ -6,6 +6,7 @@ import 'package:antello/widgets/push_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../classes/app_user.dart';
+import '../main.dart';
 import '../utils/authentication.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/google_sign_in_button.dart';
@@ -53,6 +54,9 @@ class _SignInScreenState extends State<SignInScreen> {
   //         }
   //       });
       
+  // Navigator.of(context).pushReplacement(
+   navigatorKey.currentState!.popUntil((route) => route.isFirst);
+
 
         print('User is signed in!');
       }

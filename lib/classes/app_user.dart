@@ -51,23 +51,28 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
   
 
    var a = (await database.ref("buddylists/$sender").get());
-   print(a);
+   print(a.value);
+   bool _k =false;
+   for(var u in ( a.value as Map).entries){
 
-
-    // print("geldim");
-
-    if(a.hasChild(nickname)) {
-      print("bu kullanıcıyla daha önce diyalog kurulmuş");
-        chatID=a.child(nickname).child(nickname).value as String;
+    if( u.value.entries.first.key==nickname){
+            print("bu kullanıcıyla daha önce diyalog kurulmuş");
+        chatID=u.value.entries.first.value;
     UserMAnagement.chatID =chatID;
-    if(chatID ==null ) return"";
+      if(chatID ==null ) return"";
        if(sender ==null ) return"";
 
         if(chatID ==nickname ) return"";
+return chatID!;
 
-    print("geldim");
-      return chatID!;}
-   
+
+    }
+
+   }
+
+    // print("geldim");
+
+
     String? newChatId= database.ref("messages").push().key;
     print("newchat =$newChatId");
 

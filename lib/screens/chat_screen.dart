@@ -122,7 +122,7 @@ class _ChatScreenState extends State<ChatScreen> {
       DateTime now =  DateTime.now();
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: AppColors.purple, actions: [PhotoChart(appUser: giver.nickname,)],),
+      appBar: AppBar(backgroundColor: AppColors.purple, actions: [PhotoChart(appUser: giver.nickname,)], title: Text(giver.nickname),),
       
       body: 
           Align(
