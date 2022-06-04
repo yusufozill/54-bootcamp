@@ -26,7 +26,7 @@ class _PPUploadState extends State<PPUpload> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(children: [
-        PhotoChart(appUser: UserMAnagement.sampleUser, maxsize:400),
+        PhotoChart(appUser: "", maxsize:400),
      
           InkWell   (
             child: const Icon(IconData(0xee39, fontFamily: 'MaterialIcons'), color: Colors.black, size: 40,  )

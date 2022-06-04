@@ -92,7 +92,7 @@ class UserChart extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   /// User için profil fotoğrafı [PhotoChart]
-                  PhotoChart(appUser: appUser,),
+                  PhotoChart(appUser: appUser.nickname,),
                   InkWell(
                     onTap: () {
                       print("pressed on name");

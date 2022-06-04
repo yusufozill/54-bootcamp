@@ -8,6 +8,7 @@ class PushButton extends StatelessWidget {
    final String butonyazisi;
    final double width;
    final double height;
+   final double fontsize;
    final Color backgroundColor;
    final Color textColor;
 
@@ -16,6 +17,7 @@ class PushButton extends StatelessWidget {
     required this.function,
     this.width=320,
     this.height=50,
+    this.fontsize=24,
     required this.butonyazisi,
     this.backgroundColor= const Color(0xFF26235C) ,
     this.textColor= Colors.white  ,
@@ -35,7 +37,7 @@ class PushButton extends StatelessWidget {
         onPressed: function,
         child: Text(butonyazisi,
             style: GoogleFonts.raleway(
-              fontSize: 24,
+              fontSize: fontsize,
             )));
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../classes/app_user.dart';
 
 class PhotoChart extends StatefulWidget {
-  final AppUser appUser;
+  final String appUser;
   final double maxsize;
   const PhotoChart({Key? key, required this.appUser, this.maxsize =100}) : super(key: key);
 
@@ -13,14 +13,7 @@ class PhotoChart extends StatefulWidget {
 }
 
 class _PhotoChartState extends State<PhotoChart> {
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    if(widget.appUser.url !=""){setState(() {
-      
-    });}
-    super.didChangeDependencies();
-  }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,8 +42,8 @@ class _PhotoChartState extends State<PhotoChart> {
               child:  FittedBox(
                   child:    true ? Icon(Icons.person, size: 162,):
               Image.network(
-             widget. appUser.url
-            
+       //      widget. appUser.url
+            ""
               , 
              
               loadingBuilder:(context, child, loadingProgress) => const LinearProgressIndicator(),

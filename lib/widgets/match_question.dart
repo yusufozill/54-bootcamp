@@ -7,6 +7,9 @@ import 'package:antello/widgets/photo_chart.dart';
 import 'package:antello/widgets/purple_button.dart';
 import 'package:flutter/material.dart';
 
+import '../classes/sohbet.dart';
+import '../screens/chat_screen.dart';
+
 class MatchQuestionWidget extends StatefulWidget {
   final MatchQuestion matchQuestion;
   const MatchQuestionWidget({ Key? key,required this.matchQuestion }) : super(key: key);
@@ -17,10 +20,12 @@ class MatchQuestionWidget extends StatefulWidget {
 
 class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
   late MatchQuestion matchQuestion ;
+   AppUser? user;
 
   @override
-  void initState() {
+  void initState()  {
    matchQuestion=widget.matchQuestion;
+     UserMAnagement.fromUsername(matchQuestion.owner).then((value) => user =value);
     super.initState();
   }
   @override
@@ -44,10 +49,10 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
           
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(matchQuestion.owner.ad+" "+matchQuestion.owner.soyad),
+            child: Text(matchQuestion.owner),
           ),
           Expanded(child: SizedBox()),
-          Text(matchQuestion.shareTime.toString())
+          Text("${matchQuestion.shareTime.day}/${matchQuestion.shareTime.month}/${matchQuestion.shareTime.year}")
         ],),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -55,12 +60,27 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            PurpleButton(answer: matchQuestion.answers.first, function: (_x){},),
-            PurpleButton(answer: matchQuestion.answers.elementAt(1), function: (_x){},),
+            PurpleButton(answer: matchQuestion.first, function: (_x){
+             cevapla(true);},),
+            PurpleButton(answer: matchQuestion.second, function: (_x){
+              cevapla(false);
+             },),
           ],
         )
       ],),
       
     );
   }
+
+  cevapla(bool cevap) async{
+     if(matchQuestion.trueAnswer != cevap) return;
+     if(user==null) return;
+     var  k = await user!.dialogKur(UserMAnagement.sender!);
+                   if(k !=""){
+                 Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ChatScreen(
+              sohbet: Sohbet(chatId:k,giver: user!.nickname,sender: UserMAnagement.sender!),
+            )));
+  }}
 }

@@ -72,12 +72,12 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
     print("newchat =$newChatId");
 
    if(newChatId==null) return "" ;
-   await database.ref("buddylists/$nickname/$sender").update({sender:newChatId});
+   await database.ref("buddylists/$nickname/$newChatId").update({sender:newChatId});
    await database.ref("messages/$newChatId").update({"users":{
      sender:true,
      nickname:true,
    },"messages":{}});
-  await database.ref("buddylists/$sender/$nickname").update({nickname:newChatId});
+   if(sender!=nickname) await database.ref("buddylists/$sender/$newChatId").update({nickname:newChatId});
   chatID=newChatId;
     UserMAnagement.chatID =chatID;
     if(chatID ==null ) return"";
@@ -93,16 +93,6 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
    return newChatId;
  }
 
-
- 
-
-  
-   
-
-
-
-
-
 }
 
 class UserMAnagement {
@@ -111,6 +101,7 @@ class UserMAnagement {
   static String? giver;
   static String? uid;
   static User? user;
+  static AppUser? appUser;
   static String? chatID;
   static String? sender;
 
@@ -149,6 +140,14 @@ class UserMAnagement {
 
     return AppUser.fromMap(newmap);
   }
+  static Future<AppUser>  fromUsername(String username) async {
+    
+
+    final database = FirebaseDatabase.instance;
+    var messagesRef = (await database.ref('Users/$username').get()).value as Map;
+  
+    return AppUser.fromMap(messagesRef);
+  }
   
   static AppUser sampleUser = AppUser(
 //    mail: "aldkadjaslkd",
@@ -162,12 +161,10 @@ class UserMAnagement {
      // uid: "sdadsa",
       url:"https://firebasestorage.googleapis.com/v0/b/antello.appspot.com/o/spotdatabase%2F1653946099214.jpg?alt=media&token=38906d6b-6045-4f58-8239-93f53b206c6d");
   static MatchQuestion sampleQuestion = MatchQuestion(
-      answers: [
-        "Edison",
-        "Tesla",
-      ],
-     trueAnswer: "Tesla",
-      owner: UserMAnagement.sampleUser,
+      first: "tesla",
+      second: "edison",
+     trueAnswer: false,
+      owner: UserMAnagement.sampleUser.nickname,
       question: "Tesla mı Edison mu ?",
       shareTime: DateTime.now());
 }

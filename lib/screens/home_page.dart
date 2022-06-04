@@ -39,7 +39,8 @@ late StreamSubscription a ;
         UserMAnagement.sender=
         UserMAnagement.uid= user.uid;
         UserMAnagement.username= (await database.ref("uids/${UserMAnagement.uid}").child("nickname").get()).value as String;
-       UserMAnagement.sender= UserMAnagement.username;
+        UserMAnagement.sender= UserMAnagement.username;
+        UserMAnagement.appUser=AppUser.fromMap((await database.ref("Users").child(UserMAnagement.username!).get()).value as Map);
         print('User is signed in!');
       }
     });
@@ -54,6 +55,7 @@ late StreamSubscription a ;
     controller.dispose();
     super.dispose();
   }
+  
 
   int tabindex=2;
   List<Widget> tabs =[ExploreTab(),MatchTab(),ChatTab(),ProfileTab()];
