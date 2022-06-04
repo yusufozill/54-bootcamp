@@ -1,4 +1,3 @@
-import 'package:antello/widgets/photo_chart.dart';
 import 'package:flutter/material.dart';
 
 class UsersRow extends StatelessWidget {

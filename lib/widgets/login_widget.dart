@@ -92,6 +92,8 @@ class _LoginWidgetState extends State<LoginWidget> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+
+       
     } on FirebaseAuthException catch (e) {
       print(e);
     }

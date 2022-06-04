@@ -29,25 +29,7 @@ class NewUser {
   static bool control(){
   return true;
    
-   String content ="";
-   List info = [
-     "İsim boş bırakılamaz",
-     "Soyisim boş bırakılamaz",
-     "Mail boş bırakılamaz",
-     "Takma ad boş bırakılamaz",
-     "Şifre boş bırakılamaz",
-     "Şifre onay boş bırakılamaz",
-     "Şifreler uyuşmuyor bırakılamaz",
-   ];
 
-  if( name == ""){content=info[0]; customSnackBar(content: content); return false;} 
-  if( surname == ""){content=info[1]; customSnackBar(content: content); return false;}
-  if( nickname == ""){content=info[3]; customSnackBar(content: content); return false;}
-  if( mail == ""){content=info[2]; customSnackBar(content: content); return false;}
-  if( password == ""){content=info[4]; customSnackBar(content: content); return false;}
-  
-
-  return true;
 
 
 
@@ -56,24 +38,33 @@ class NewUser {
     Map<String, dynamic> newmap = {};
     newmap.addAll(
         {
-        "name": name,
+         "name": name,
         "surname": surname,
         "department": department,
         "gender": gender.toString(),
         "birthday": birthday.toString(),
+        "messages":{},
         "nickname": nickname,
-        "mail": mail,
         "bio": bio,
         "url":"",
-        "secret":{uid.toString(): true, "password": password},
+
        
       },
     );
     final database = FirebaseDatabase.instance;
     
     DatabaseReference messagesRef = database.ref('Users/$nickname');
-    database.ref("uids/").set({uid:nickname});
-    messagesRef.set(newmap).then((value){ print("newuser Oluşturuldu");});
+     database.ref('uids/$uid').update({
+        "mail": mail,
+        "nickname":nickname,
+        nickname:true,
+        uid.toString(): true,
+        "password": password,
+        "public":newmap,
+    });
+
+    messagesRef.update(newmap).then((value){ print("newuser Oluşturuldu");});
    
   }
 }
+

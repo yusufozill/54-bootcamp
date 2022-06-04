@@ -1,5 +1,7 @@
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/widgets/user_chart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class ExploreTab extends StatefulWidget {
@@ -26,12 +28,16 @@ class _ExploreTabState extends State<ExploreTab> {
   }
   @override
   void initState() {
+    var database =FirebaseDatabase.instance;
     // TODO: implement initState
     UserMAnagement.randomUser(5).then((value) => setState(() {
       
     },));
+    UserMAnagement.user= FirebaseAuth.instance.currentUser;
+
     super.initState();
   }
+  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

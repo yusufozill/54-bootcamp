@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/scaffold/bottom_navigation_bar.dart';
 import 'package:antello/tabs/explore_tab.dart';
@@ -5,6 +7,8 @@ import 'package:antello/tabs/match_tab.dart';
 import 'package:antello/tabs/profile_tab.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 import 'package:flutter/material.dart';
 import '../tabs/chat_tab.dart';
 import '../widgets/user_chart.dart';
@@ -18,20 +22,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>  with TickerProviderStateMixin  {
   late TabController controller;
-  User? _user;
-
+late StreamSubscription a ;
   @override
   void initState() {
     // TODO: implement initState
 
     controller= TabController(length: 4, vsync: this);
-      FirebaseAuth.instance.authStateChanges().listen((User? user) async{
+   a=   FirebaseAuth.instance.authStateChanges().listen((User? user) async{
       
       if (user == null) {
       
         debugPrint('User is currently signed out!');
       } else {
-        user=_user;
+       var database= FirebaseDatabase.instance;
+        UserMAnagement.user=user;
+        UserMAnagement.sender=
+        UserMAnagement.uid= user.uid;
+        UserMAnagement.username= (await database.ref("uids/${UserMAnagement.uid}").child("nickname").get()).value as String;
+       UserMAnagement.sender= UserMAnagement.username;
         print('User is signed in!');
       }
     });
@@ -42,11 +50,12 @@ class _HomePageState extends State<HomePage>  with TickerProviderStateMixin  {
   @override
   void dispose() {
     // TODO: implement dispose
+    a.cancel();
     controller.dispose();
     super.dispose();
   }
 
-  int tabindex=0;
+  int tabindex=2;
   List<Widget> tabs =[ExploreTab(),MatchTab(),ChatTab(),ProfileTab()];
   @override
   Widget build(BuildContext context) {

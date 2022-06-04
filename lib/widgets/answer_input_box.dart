@@ -34,9 +34,7 @@ class _AnswerInputBoxState extends State<AnswerInputBox> {
       width: 320,
       height: 50,
       child: TextField(
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
-        ],
+       
         controller: widget.controller,
         maxLength: 20,
         decoration: InputDecoration(

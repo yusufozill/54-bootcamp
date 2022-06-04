@@ -1,6 +1,6 @@
 import 'package:antello/classes/match_question_class.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
 
 class AppUser {
   late String ad;
@@ -33,33 +33,72 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
     nickname = map["nickname"];
     url = map["url"];  
     bio = map["bio"];
+    print(map);
   }
 
- Future<String?> dialogKur(String username)async {
+  get context => null;
 
-   if(chatID!=null) return chatID  ;
-    var h = (await FirebaseDatabase.instance.ref("Users/$username/messages").child(username).  once());
-    if(h.snapshot.exists) return h.snapshot.value as String;
+ Future<String> dialogKur(String sender)async {
+    UserMAnagement.sender=sender;
+    UserMAnagement.giver=nickname;
+   print("from:$sender, to:$nickname");
+
+
+    var database= FirebaseDatabase.instance;
+
+   if(chatID!=null) return chatID!  ;
+    print("salatalık $sender");
+  
+
+   var a = (await database.ref("buddylists/$sender").get());
+   print(a);
+
+
+    // print("geldim");
+
+    if(a.hasChild(nickname)) {
+      print("bu kullanıcıyla daha önce diyalog kurulmuş");
+        chatID=a.child(nickname).child(nickname).value as String;
+    UserMAnagement.chatID =chatID;
+    if(chatID ==null ) return"";
+       if(sender ==null ) return"";
+
+        if(chatID ==nickname ) return"";
+
+    print("geldim");
+      return chatID!;}
    
-   String? newChatId= FirebaseDatabase.instance.ref().child("messages").push().key;
-   FirebaseDatabase.instance.ref("Users/$nickname/messages").set({username:newChatId});
-   chatID=newChatId;
+    String? newChatId= database.ref("messages").push().key;
+    print("newchat =$newChatId");
+
+   if(newChatId==null) return "" ;
+   await database.ref("buddylists/$nickname/$sender").update({sender:newChatId});
+   await database.ref("messages/$newChatId").update({"users":{
+     sender:true,
+     nickname:true,
+   },"messages":{}});
+  await database.ref("buddylists/$sender/$nickname").update({nickname:newChatId});
+  chatID=newChatId;
+    UserMAnagement.chatID =chatID;
+    if(chatID ==null ) return"";
+       if(sender ==null ) return"";
+
+        if(chatID ==nickname ) return"";
+
+    print("geldim");
+   
+   print("from:$sender, to:$nickname");
+
+   
    return newChatId;
  }
 
- sendMessage(String newMessage, String sender){
-    FirebaseDatabase.instance.ref().child("messages/$chatID").set({sender +":" + DateTime.now().toString():{
-      "sender":sender,
-      "time":DateTime.now().toString(),
-      "message":newMessage
-    }});
+
  
 
   
    
- }
 
- 
 
 
 
@@ -68,13 +107,21 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
 
 class UserMAnagement {
   static List<AppUser> allusers=[];
+  static String? username;
+  static String? giver;
+  static String? uid;
+  static User? user;
+  static String? chatID;
+  static String? sender;
+
+  
   static Future<List<AppUser>> randomUser(int count) async{ 
     allusers=[];
    var a =await FirebaseDatabase.instance.ref("Users").once();
 
    for(var i in a.snapshot.children){
      print(i.value as Map);
-     AppUser.fromMap(i.value as Map);
+     
      allusers.add(AppUser.fromMap(i.value as Map));
    }
     return allusers;

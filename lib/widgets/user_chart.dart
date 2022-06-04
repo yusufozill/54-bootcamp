@@ -1,6 +1,11 @@
+import 'dart:html';
+
 import 'package:antello/classes/app_user.dart';
+import 'package:antello/classes/sohbet.dart';
+import 'package:antello/screens/chat_screen.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
+import 'package:antello/widgets/user_match_question_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +19,6 @@ class UserChart extends StatelessWidget {
   /// Her bir [UserChart] bilgileri çekebileceği [AppUser] nesnesine
   /// ihtiyaç duyar. [appUser] isminin sebebi Auth user ile karışmaması için
   final AppUser appUser;
-
 
   const UserChart({Key? key, required this.appUser}) : super(key: key);
 
@@ -39,7 +43,24 @@ class UserChart extends StatelessWidget {
         child: Stack(
           children: [
             InkWell(
-              onTap: () {
+              onTap: () async{
+                if(UserMAnagement.user==null){
+                  print("giriş yapılmamış");
+                  return;
+                }
+                var k= await appUser.dialogKur(UserMAnagement.sender!);
+
+               if(k !=""){
+                 Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ChatScreen(
+              sohbet: Sohbet(chatId:k,giver: appUser.nickname,sender: UserMAnagement.sender!),
+            ),
+          ),
+        );
+
+               }
+
                 print("Pressed on widget");
               },
               child: Align(
