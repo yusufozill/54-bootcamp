@@ -67,6 +67,8 @@ class _MatchTabState extends State<MatchTab> {
          
           
         });
+        matchwidgets.shuffle();
+
 
         
         
@@ -87,7 +89,7 @@ class _MatchTabState extends State<MatchTab> {
   void initState() {
       if  (UserMAnagement.user!=null){
     
-    matchwidgets=[UserMatchQuestionWidget(user: UserMAnagement.appUser??UserMAnagement.sampleUser, tamamfonk:tamamfonk)];
+    birincieleman=UserMatchQuestionWidget(user: UserMAnagement.appUser??UserMAnagement.sampleUser, tamamfonk:tamamfonk);
       
     
  init();
@@ -97,7 +99,7 @@ class _MatchTabState extends State<MatchTab> {
 
     super.initState();
   }
-  late Widget birincieleman;
+  Widget birincieleman=Text("");
   tamamfonk(MatchQuestion question){
  // birincieleman=MatchQuestionWidget(matchQuestion: question);
    setState(() {
@@ -114,7 +116,7 @@ class _MatchTabState extends State<MatchTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(children:  matchwidgets ,),
+      child: Column(children: [ birincieleman] + matchwidgets ,),
     );
   }
 }

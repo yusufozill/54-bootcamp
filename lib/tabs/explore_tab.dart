@@ -19,6 +19,7 @@ class _ExploreTabState extends State<ExploreTab> {
       _i.add(UserChart(appUser: i));
 
     }
+    _i.shuffle();
     // while(_i.length<s){
     //   _i.add(UserChart(appUser: UserMAnagement.sampleUser));
       
