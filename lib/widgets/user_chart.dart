@@ -45,7 +45,7 @@ class UserChart extends StatelessWidget {
               onTap: () async{
                 if(UserMAnagement.user==null){
                   if (kDebugMode) {
-                    print("giriş yapılmamış");
+                    debugPrint("giriş yapılmamış");
                   }
                   return;
                 }
@@ -63,7 +63,7 @@ class UserChart extends StatelessWidget {
                }
 
                 if (kDebugMode) {
-                  print("Pressed on widget");
+                  debugPrint("Pressed on widget");
                 }
               },
               child: Align(
@@ -99,7 +99,7 @@ class UserChart extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (kDebugMode) {
-                        print("pressed on name");
+                        debugPrint("pressed on name");
                       }
                     },
                     child: Text(
@@ -110,7 +110,7 @@ class UserChart extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (kDebugMode) {
-                        print("pressed on bio text");
+                        debugPrint("pressed on bio text");
                       }
                     },
                     child: Padding(
@@ -138,14 +138,14 @@ class UserChart extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         if (kDebugMode) {
-                          print("pressed on close");
+                          debugPrint("pressed on close");
                         }
                       },
                       icon: const Icon(Icons.close),
                     ),
                     IconButton(
                       onPressed: () {
-                        print("pressed on information");
+                        debugPrint("pressed on information");
                       },
                       icon: const Icon(Icons.info),
                     ),

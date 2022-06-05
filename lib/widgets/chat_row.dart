@@ -54,12 +54,12 @@ class _ChatCardState extends State<ChatCard> {
 
     _messagesSubscription =
         messagesQuery.onChildAdded.listen((DatabaseEvent event) {
-      print('Child added: ${event.snapshot.value}');
+      debugPrint('Child added: ${event.snapshot.value}');
       mesaj =Message.fromMap(event.snapshot.value as Map);
 
       (Object o) {
         final error = o as FirebaseException;
-        print('Error: ${error.code} ${error.message}');
+        debugPrint('Error: ${error.code} ${error.message}');
       };
     });
     var a =await FirebaseDatabase.instance.ref("Users/${widget.username}").once();
@@ -74,7 +74,7 @@ class _ChatCardState extends State<ChatCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        print("h");
+        debugPrint("h");
                  Navigator.of(context).push(
 
           MaterialPageRoute(

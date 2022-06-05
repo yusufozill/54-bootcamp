@@ -72,7 +72,7 @@ class Authentication {
         debugPrint(e.toString());
       }
     } else {
-      print("Scope girrildi");
+      debugPrint("Scope girrildi");
       final GoogleSignIn googleSignIn = GoogleSignIn(
         scopes: [
     //       "https://www.googleapis.com/auth/drive.file",
@@ -90,7 +90,7 @@ class Authentication {
            
       if (googleSignInAccount != null) {
         var headers =await googleSignInAccount.authHeaders;
-        print( "headers: ${headers.entries.first.value}");
+        debugPrint( "headers: ${headers.entries.first.value}");
 
       //         final SharedPreferences prefs = await SharedPreferences.getInstance();
       // prefs.setStringList("HeadersKey", headers.keys.toList()  );

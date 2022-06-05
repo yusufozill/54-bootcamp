@@ -25,8 +25,8 @@ class AnswerBox extends StatelessWidget {
           ),
           value: yanit.cevap==NewUser.gender.cevap,
           onChanged: (bool? value) {
-            print(value);
-            print(yanit.cevap);
+            debugPrint(value.toString());
+            debugPrint(yanit.cevap);
 
             function(value??false ? yanit: Answers(cevap: "cevap"));
  

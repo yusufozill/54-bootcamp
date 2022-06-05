@@ -61,7 +61,7 @@ class NewUser {
         "public":newmap,
     });
 
-    messagesRef.update(newmap).then((value){ print("newuser Oluşturuldu");});
+    messagesRef.update(newmap).then((value){ debugPrint("newuser Oluşturuldu");});
    
   }
 }

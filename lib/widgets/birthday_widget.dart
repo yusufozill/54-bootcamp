@@ -50,7 +50,7 @@ class _BirthdayWidgetState extends State<BirthdayWidget> {
    setState(() {
      time= _time;
      NewUser.birthday=_time;
-     print(_time);
+     debugPrint(_time.toString());
    });
   }
 }

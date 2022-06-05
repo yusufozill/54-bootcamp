@@ -39,7 +39,7 @@ late StreamSubscription a ;
         UserMAnagement.username= (await database.ref("uids/${UserMAnagement.uid}").child("nickname").get()).value as String;
         UserMAnagement.sender= UserMAnagement.username;
         UserMAnagement.appUser=AppUser.fromMap((await database.ref("Users").child(UserMAnagement.username!).get()).value as Map);
-        print('User is signed in!');
+        debugPrint('User is signed in!');
       }
     });
 
@@ -68,7 +68,7 @@ late StreamSubscription a ;
 
   
   goPage(int page){
-    print("şu sayfaya geçildi $page");
+    debugPrint("şu sayfaya geçildi $page");
     
     setState(() {
        tabindex= page;

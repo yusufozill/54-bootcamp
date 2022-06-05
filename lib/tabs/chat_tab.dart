@@ -35,7 +35,7 @@ class _ChatTabState extends State<ChatTab> {
     // TODO: implement initState
     user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      print("user sing out");
+      debugPrint("user sing out");
     } else {
       uid = user!.uid;
       UserMAnagement.uid = uid;
@@ -49,15 +49,15 @@ class _ChatTabState extends State<ChatTab> {
 
     if (UserMAnagement.username == "") return;
     if (UserMAnagement.username ==null) return;
-    print("chatTabInıt");
+    debugPrint("chatTabInıt");
     final database = FirebaseDatabase.instance;
 
        
-    print("name: ${UserMAnagement.username}");
+    debugPrint("name: ${UserMAnagement.username}");
 
     UserMAnagement.sender = UserMAnagement.username;
     _messagesRef = database.ref("buddylists").child(UserMAnagement.sender!);
-    _messagesRef.get().then((value) => print(value.value));
+    _messagesRef.get().then((value) => debugPrint(value.value.toString()));
 
     database.setLoggingEnabled(false);
     if (!kIsWeb) {
@@ -69,8 +69,8 @@ class _ChatTabState extends State<ChatTab> {
 
     _messagesSubscription = messagesQuery.onChildAdded.listen(
       (DatabaseEvent event) {
-        print('Child added: ${(event.snapshot.value as Map).entries.first.key}');
-        print('Child added: ${(event.snapshot.value as Map).entries.first.value}');
+        debugPrint('Child added: ${(event.snapshot.value as Map).entries.first.key}');
+        debugPrint('Child added: ${(event.snapshot.value as Map).entries.first.value}');
         setState(() {
           
         
@@ -90,7 +90,7 @@ class _ChatTabState extends State<ChatTab> {
       },
       onError: (Object o) {
         final error = o as FirebaseException;
-        print('Error: ${error.code} ${error.message}');
+        debugPrint('Error: ${error.code} ${error.message}');
       },
     );
 

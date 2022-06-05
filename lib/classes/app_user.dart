@@ -26,7 +26,7 @@ class AppUser {
       required this.bio});
 AppUser.fromMap(Map<dynamic, dynamic> map) {
     if (kDebugMode) {
-      print( "nası ya");
+      debugPrint( "nası ya");
     }
     department = map["department"];
     gender = map["gender"];
@@ -45,7 +45,7 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
     UserMAnagement.sender=sender;
     UserMAnagement.giver=nickname;
    if (kDebugMode) {
-     print("from:$sender, to:$nickname");
+     debugPrint("from:$sender, to:$nickname");
    }
 
 
@@ -53,19 +53,21 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
 
    if(chatID!=null) return chatID!  ;
     if (kDebugMode) {
-      print("salatalık $sender");
+      debugPrint("salatalık $sender");
     }
   
 
    var a = (await database.ref("buddylists/$sender").get());
    if (kDebugMode) {
-     print(a.value);
+     debugPrint(a.value.toString());
    }
-   for(var u in ( a.value as Map).entries){
+
+   if(a.value!=null)
+ {  for(var u in ( a.value as Map).entries){
 
     if( u.value.entries.first.key==nickname){
             if (kDebugMode) {
-              print("bu kullanıcıyla daha önce diyalog kurulmuş");
+              debugPrint("bu kullanıcıyla daha önce diyalog kurulmuş");
             }
         chatID=u.value.entries.first.value;
     UserMAnagement.chatID =chatID;
@@ -77,14 +79,14 @@ return chatID!;
 
     }
 
-   }
+   }}
 
-    // print("geldim");
+    // debugPrint("geldim");
 
 
     String? newChatId= database.ref("messages").push().key;
     if (kDebugMode) {
-      print("newchat =$newChatId");
+      debugPrint("newchat =$newChatId");
     }
 
    if(newChatId==null) return "" ;
@@ -102,11 +104,11 @@ return chatID!;
         if(chatID ==nickname ) return"";
 
     if (kDebugMode) {
-      print("geldim");
+      debugPrint("geldim");
     }
    
    if (kDebugMode) {
-     print("from:$sender, to:$nickname");
+     debugPrint("from:$sender, to:$nickname");
    }
 
    
@@ -132,7 +134,7 @@ class UserMAnagement {
 
    for(var i in a.snapshot.children){
      if (kDebugMode) {
-       print(i.value as Map);
+       debugPrint((i.value as Map).toString());
      }
      
      allusers.add(AppUser.fromMap(i.value as Map));
@@ -159,7 +161,7 @@ class UserMAnagement {
       });
     });
     if (kDebugMode) {
-      print("$uid user indirildi");
+      debugPrint("$uid user indirildi");
     }
 
     return AppUser.fromMap(newmap);

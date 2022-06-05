@@ -169,12 +169,12 @@ class _SignUpState extends State<SignUp> {
     DatabaseReference messagesRef = database.ref('Users/${nick.text}');
     await messagesRef.once().then((value) {
       nickvalue = value.snapshot.exists;
-     if(nickvalue) print("bu kullanıcı adı var");
+     if(nickvalue) debugPrint("bu kullanıcı adı var");
     });
     final isValid = formKey.currentState!.validate();
 
     if (nickvalue) return;
-    print("bu kullanıcı adı yok");
+    debugPrint("bu kullanıcı adı yok");
 
     if (!isValid) return;
 
@@ -204,7 +204,7 @@ class _SignUpState extends State<SignUp> {
           ),
         );
     } on FirebaseAuthException catch (e) {
-      print(e);
+      debugPrint(e.toString());
       Email.showSnackBar(e.message);
     }
  

@@ -21,7 +21,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   void initState() {
-    print("sign in screen");
+    debugPrint("sign in screen");
 
     FirebaseAuth.instance.authStateChanges().listen((User? user) async{
       
@@ -52,7 +52,7 @@ class _SignInScreenState extends State<SignInScreen> {
    navigatorKey.currentState!.popUntil((route) => route.isFirst);
 
 
-        print('User is signed in!');
+        debugPrint('User is signed in!');
       }
     });
 

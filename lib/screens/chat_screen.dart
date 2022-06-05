@@ -32,18 +32,24 @@ class _ChatScreenState extends State<ChatScreen> {
   void dispose() {
     // TODO: implement dispose
     // _counterSubscription.cancel();
-    _messagesSubscription.cancel();
     super.dispose();
+    if (user== null) return;
+
+    _messagesSubscription.cancel();
+
   }
   @override
   void initState() {
     // TODO: implement initState
     user= FirebaseAuth.instance.currentUser;
     if (user== null) {
+      debugPrint("chat screen kullanıcı boiş");
+      Navigator.of(context).pop();
+
     }else{
       uid=user!.uid;
       UserMAnagement.uid=uid;
-      Navigator.of(context).pop();
+      debugPrint("kullanıcı dolu");
 
 
     }
@@ -91,7 +97,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     _messagesSubscription = messagesQuery.onChildAdded.listen(
       (DatabaseEvent event) {
-        print('Child added: ${event.snapshot.value}');
+        debugPrint('Child added: ${event.snapshot.value}');
 
         setState(() {
         
@@ -107,7 +113,7 @@ class _ChatScreenState extends State<ChatScreen> {
       },
       onError: (Object o) {
         final error = o as FirebaseException;
-        print('Error: ${error.code} ${error.message}');
+        debugPrint('Error: ${error.code} ${error.message}');
       },
     );
   }

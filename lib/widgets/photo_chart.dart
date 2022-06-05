@@ -83,7 +83,7 @@ class SideArrowClip extends CustomClipper<Path> {
     final double startMargin = size.width / 2;
     final double s1 = size.height * 0.5;
     final double s2 = size.height * 0.6;
-    print('S1:$s1 SH:${size.height / 2} S2:$s2');
+    debugPrint('S1:$s1 SH:${size.height / 2} S2:$s2');
     path.lineTo(startMargin, 0);
     path.lineTo(startMargin, s1);
     path.lineTo(s1, size.height);

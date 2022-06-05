@@ -41,7 +41,7 @@ class _GenderWidgetState extends State<GenderWidget> {
   }
 
     void isChecked(Answers _ans){
-      print(_ans.cevap);
+      debugPrint(_ans.cevap);
 setState(() {
 NewUser.gender=_ans;
 

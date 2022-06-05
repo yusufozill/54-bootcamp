@@ -31,7 +31,7 @@ trueAnswer=dogrucevap;
 FirebaseDatabase.instance.ref("matchQuestions").child(user.nickname).set({
   "question":soru,"firstAnswer":firstAnswer,"secondAnswer":secondAnswer, "answer":dogrucevap, "owner":user.nickname, "time" :shareTime.microsecondsSinceEpoch
 })
-//.then((value) => print("yeni mq gönderildi"))
+//.then((value) => debugPrint("yeni mq gönderildi"))
 ;
 
 

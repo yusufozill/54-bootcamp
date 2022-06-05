@@ -37,15 +37,15 @@ class _MatchTabState extends State<MatchTab> {
 
     if (UserMAnagement.username == "") return;
     if (UserMAnagement.username ==null) return;
-    print("chatTabInıt");
+    debugPrint("chatTabInıt");
     final database = FirebaseDatabase.instance;
 
        
-    print("name: ${UserMAnagement.username}");
+    debugPrint("name: ${UserMAnagement.username}");
 
     UserMAnagement.sender = UserMAnagement.username;
     _messagesRef = database.ref("matchQuestions");
-    _messagesRef.get().then((value) => print(value.value));
+    _messagesRef.get().then((value) => debugPrint(value.value.toString()));
 
     database.setLoggingEnabled(false);
     if (!kIsWeb) {
@@ -57,7 +57,7 @@ class _MatchTabState extends State<MatchTab> {
 
     _messagesSubscription = messagesQuery.onChildAdded.listen(
       (DatabaseEvent event) {
-        print('Child added: $event');
+        debugPrint('Child added: $event');
         setState(() {
       var _a=   MatchQuestion.fromMap(event.snapshot.value as Map);
       // if(_a.owner==UserMAnagement.username){
@@ -78,7 +78,7 @@ class _MatchTabState extends State<MatchTab> {
       },
       onError: (Object o) {
         final error = o as FirebaseException;
-        print('Error: ${error.code} ${error.message}');
+        debugPrint('Error: ${error.code} ${error.message}');
       },
     );
 
