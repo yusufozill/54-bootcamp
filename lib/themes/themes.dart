@@ -1,3 +1,4 @@
+import 'package:antello/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class Themes{
@@ -5,9 +6,8 @@ class Themes{
   /// [primaryTheme] bizim ana temamızdır
   static ThemeData primaryTheme = ThemeData(
   
-  backgroundColor: Colors.blue,
-  
-        primarySwatch: Colors.blue,
+  backgroundColor:AppColors.purple,
+primarySwatch: Colors.blue,
       );
 
   

@@ -16,22 +16,22 @@ class _GenderWidgetState extends State<GenderWidget> {
   Widget build(BuildContext context) {
     return Column(
         children: [
-          Text(" what is your gender ?",
+          Text(" Cinsiyetiniz nedir ?",
               style: GoogleFonts.raleway(
                 fontSize: 24,
               )),
           const SizedBox(
             height: 50,
           ),
-          AnswerBox(yanit: Answers(cevap: "kız"),function: isChecked,),
+          AnswerBox(yanit: Answers(cevap: "Kadın"),function: isChecked,),
           const SizedBox(
             height: 50,
           ),
-          AnswerBox(yanit: Answers(cevap: "erkek"),function: isChecked,),
+          AnswerBox(yanit: Answers(cevap: "Erkek"),function: isChecked,),
            const SizedBox(
             height: 50,
           ),
-          AnswerBox(yanit: Answers(cevap: "belirtmek istemiyorum"), function:isChecked),
+          AnswerBox(yanit: Answers(cevap: "Belirtmek istemiyorum"), function:isChecked),
           const SizedBox(
             height: 50,
           )

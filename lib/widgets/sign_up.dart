@@ -24,7 +24,6 @@ class _SignUpState extends State<SignUp> {
   TextEditingController isim = TextEditingController(),
       soyisim = TextEditingController(),
       nick = TextEditingController(),
-
       password1 = TextEditingController();
 
   @override
@@ -138,8 +137,8 @@ class _SignUpState extends State<SignUp> {
               height: 40,
             ),
             ElevatedButton.icon(
-                style:
-                    ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
+                style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50)),
                 onPressed: signUp,
                 icon: const Icon(FontAwesomeIcons.lock),
                 label: const Text("SignUp")),
@@ -169,7 +168,7 @@ class _SignUpState extends State<SignUp> {
     DatabaseReference messagesRef = database.ref('Users/${nick.text}');
     await messagesRef.once().then((value) {
       nickvalue = value.snapshot.exists;
-     if(nickvalue) debugPrint("bu kullanıcı adı var");
+      if (nickvalue) debugPrint("bu kullanıcı adı var");
     });
     final isValid = formKey.currentState!.validate();
 
@@ -178,35 +177,32 @@ class _SignUpState extends State<SignUp> {
 
     if (!isValid) return;
 
-    NewUser.mail=  emailController.text ;
-    NewUser.password=  passwordController .text; 
-    NewUser.name= isim  .text; 
-     NewUser.surname=  soyisim  .text; 
-     NewUser.nickname=  nick  .text; 
+    NewUser.mail = emailController.text;
+    NewUser.password = passwordController.text;
+    NewUser.name = isim.text;
+    NewUser.surname = soyisim.text;
+    NewUser.nickname = nick.text;
     showDialog(
         context: context,
         builder: ((context) => const Center(
               child: CircularProgressIndicator(),
             )));
     try {
-    late  User k;  
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim()).then((value) => k=value.user!);
+      late User k;
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim())
+          .then((value) => k = value.user!);
 
-
-
-              Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => QuestionsPage(
-              user :k
-            ),
-          ),
-        );
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => QuestionsPage(user: k),
+        ),
+      );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.toString());
       Email.showSnackBar(e.message);
     }
- 
   }
 }

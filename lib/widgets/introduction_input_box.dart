@@ -1,4 +1,5 @@
 import 'package:antello/classes/new_user_informations.dart';
+import 'package:antello/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionInputBox extends StatefulWidget {
@@ -33,9 +34,9 @@ class _IntroductionInputBoxState extends State<IntroductionInputBox> {
         keyboardType: TextInputType.multiline,
         decoration: InputDecoration(
           icon: const Icon(Icons.account_circle_rounded),
-          hintText: "Talk about what you want.....",
+          hintText: "Biraz kendinizden bahseder misiniz...",
           hintStyle: const TextStyle(
-            color: Color(0x9526235C),
+            color: AppColors.purple,
             fontStyle: FontStyle.italic,
           ),
           suffixIcon: _controller.text.isEmpty

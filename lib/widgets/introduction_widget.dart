@@ -15,7 +15,7 @@ class _IntroduceWidgetState extends State<IntroduceWidget> {
       Column(
         children: [
           Container(
-            child: Text(" Introduce Yourself",
+            child: Text("Kendini Tanıt",
                 style: GoogleFonts.raleway(
                   fontSize: 24,
                 )),

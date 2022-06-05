@@ -1,11 +1,15 @@
+import 'package:antello/classes/open_route.dart';
+import 'package:antello/tabs/profile_tab.dart';
 import 'package:antello/themes/app_colors.dart';
+import 'package:antello/widgets/profile_widget.dart';
 import 'package:flutter/material.dart';
 
 
 class PhotoChart extends StatefulWidget {
   final String appUser;
+   String? url;
   final double maxsize;
-  const PhotoChart({Key? key, required this.appUser, this.maxsize =100}) : super(key: key);
+   PhotoChart({Key? key, required this.appUser, this.url, this.maxsize =100}) : super(key: key);
 
   @override
   State<PhotoChart> createState() => _PhotoChartState();
@@ -15,60 +19,68 @@ class _PhotoChartState extends State<PhotoChart> {
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints:  BoxConstraints(maxHeight: widget.maxsize, maxWidth: widget.maxsize),
-      child: Stack(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(2),
-            margin: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-                color: AppColors.purple,
-                borderRadius: BorderRadius.circular(100)),
-            child: Padding(
-              padding: const EdgeInsets.all(1),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100))),
+    return InkWell(
+      onTap: (){
+        debugPrint("profile fotoğrafına basıldı");
+        openRoute(context, 
+        ProfileTab(username:widget.appUser)
+        );
+      },
+      child: Container(
+        constraints:  BoxConstraints(maxHeight: widget.maxsize, maxWidth: widget.maxsize),
+        child: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(2),
+              margin: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                  color: AppColors.purple,
+                  borderRadius: BorderRadius.circular(100)),
+              child: Padding(
+                padding: const EdgeInsets.all(1),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(100))),
+              ),
             ),
-          ),
-          Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(100)),
-              margin: const EdgeInsets.all(10),
-              clipBehavior: Clip.hardEdge,
-              child:  FittedBox(
-                  child:    true ? const Icon(Icons.person, size: 162,):
-              Image.network(
-       //      widget. appUser.url
-            ""
-              , 
-             
-              loadingBuilder:(context, child, loadingProgress) => const LinearProgressIndicator(),
-              frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                return const Text("Frame builder");
-              },
-              errorBuilder: (context, error, stackTrace) {
-               return  Text(error.toString() + " stack "+  stackTrace.toString(), textAlign: TextAlign.center,) ;
-              },
-
-              )
+            Container(
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(100)),
+                margin: const EdgeInsets.all(10),
+                clipBehavior: Clip.hardEdge,
+                child:  FittedBox(
+                    child:    widget.url==null ? const Icon(Icons.person, size: 162,):
+                Image.network(
+               widget.url!
             
+                , 
+               
+                loadingBuilder:(context, child, loadingProgress) => const LinearProgressIndicator(),
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                  return const Text("Frame builder");
+                },
+                errorBuilder: (context, error, stackTrace) {
+                 return  Text(error.toString() + " stack "+  stackTrace.toString(), textAlign: TextAlign.center,) ;
+                },
+
+                )
               
-              )),
-          Transform.rotate(
-              angle: -3.14 / 6,
-              child: Container(
-                constraints: const BoxConstraints.expand(),
-                child: const CircularProgressIndicator(
-                  value: 0.65,
-                  color: AppColors.yellow,
-                  strokeWidth: 2,
-                ),
-              )),
-        ],
-        alignment: Alignment.center,
+                
+                )),
+            Transform.rotate(
+                angle: -3.14 / 6,
+                child: Container(
+                  constraints: const BoxConstraints.expand(),
+                  child: const CircularProgressIndicator(
+                    value: 0.65,
+                    color: AppColors.yellow,
+                    strokeWidth: 2,
+                  ),
+                )),
+          ],
+          alignment: Alignment.center,
+        ),
       ),
     );
   }

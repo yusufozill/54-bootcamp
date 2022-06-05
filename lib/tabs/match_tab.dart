@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:ui';
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/match_question_class.dart';
 import 'package:antello/widgets/match_question.dart';
@@ -8,9 +8,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../themes/app_colors.dart';
 
 class MatchTab extends StatefulWidget {
-  const MatchTab({ Key? key }) : super(key: key);
+
+ const MatchTab({ Key? key }) : super(key: key);
 
   @override
   State<MatchTab> createState() => _MatchTabState();
@@ -35,15 +38,12 @@ class _MatchTabState extends State<MatchTab> {
 
   init() async {
 
-    if (UserMAnagement.username == "") return;
-    if (UserMAnagement.username ==null) return;
     debugPrint("chatTabInıt");
     final database = FirebaseDatabase.instance;
 
        
     debugPrint("name: ${UserMAnagement.username}");
 
-    UserMAnagement.sender = UserMAnagement.username;
     _messagesRef = database.ref("matchQuestions");
     _messagesRef.get().then((value) => debugPrint(value.value.toString()));
 
@@ -63,7 +63,10 @@ class _MatchTabState extends State<MatchTab> {
       // if(_a.owner==UserMAnagement.username){
       //   matchwidgets.removeAt(0);
       // }
-        matchwidgets.add(MatchQuestionWidget(matchQuestion: _a));
+        matchwidgets.add(Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: MatchQuestionWidget(matchQuestion: _a),
+        ));
          
           
         });
@@ -92,9 +95,9 @@ class _MatchTabState extends State<MatchTab> {
     birincieleman=UserMatchQuestionWidget(user: UserMAnagement.appUser??UserMAnagement.sampleUser, tamamfonk:tamamfonk);
       
     
- init();
 
     }
+ init();
     
 
     super.initState();
@@ -115,8 +118,21 @@ class _MatchTabState extends State<MatchTab> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(children: [ birincieleman] + matchwidgets ,),
+    return Scaffold(
+      appBar:AppBar(
+        centerTitle: true,
+        backgroundColor:AppColors.purple,
+        title:Text("Formica",style:GoogleFonts.comfortaa(
+          fontSize:23,
+          fontWeight:FontWeight.bold,
+        ),),
+      ),
+     body: SingleChildScrollView(
+            child: Column(children: [ birincieleman] + matchwidgets ,),
+          ),
+
+
     );
   }
+
 }

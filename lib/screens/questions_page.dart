@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../classes/new_user_informations.dart';
+import '../themes/app_colors.dart';
 import '../widgets/push_button.dart';
 
 
@@ -36,11 +36,11 @@ class _QuestionsPageState extends State<QuestionsPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: const Color(0xFF26235C),
+        backgroundColor: AppColors.purple,
         title: Text(
           "Formica",
           style: GoogleFonts.montserrat(
-            color: const Color(0xFFF7DF1E),
+            color: AppColors.yellow,
             fontSize: 24,
             fontStyle: FontStyle.italic,
           ),
@@ -71,7 +71,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
               currentStep: currentstep,
               size: 5,
               padding: 0,
-              selectedColor: const Color(0xFF26235C),
+              selectedColor: AppColors.purple,
               unselectedColor: Colors.grey,
               roundedEdges: const Radius.circular(10),
             ),
@@ -94,7 +94,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                   GenderWidget(),
                   BirthdayWidget(),
                   StudyWidget(),
-                  IntroduceWidget()
+                  IntroduceWidget(),
                 ],
               ),
             ),

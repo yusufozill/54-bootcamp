@@ -26,6 +26,7 @@ class Message {
                     tail: false,
                     color:  sender==UserMAnagement.sender ? const Color(0xFFE8E8EE): AppColors.purple,
                     delivered: true,
+                    textStyle:  sender==UserMAnagement.sender ? TextStyle(color: AppColors.purple):TextStyle(color: AppColors.white),
                     isSender:sender==UserMAnagement.sender,
                   );
    

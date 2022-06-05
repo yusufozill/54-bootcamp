@@ -49,18 +49,8 @@ class UserChart extends StatelessWidget {
                   }
                   return;
                 }
-                var k= await appUser.dialogKur(UserMAnagement.sender!);
-
-               if(k !=""){
-                 Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => ChatScreen(
-              sohbet: Sohbet(chatId:k,giver: appUser.nickname,sender: UserMAnagement.sender!),
-            ),
-          ),
-        );
-
-               }
+             
+              UserMAnagement.sendAndShow(UserMAnagement.username, appUser.nickname, context);
 
                 if (kDebugMode) {
                   debugPrint("Pressed on widget");

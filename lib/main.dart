@@ -53,7 +53,6 @@ class MyApp extends StatelessWidget {
 
       routes: {
         '/':(context)=>const HomePage(),
-         
         '/SignIn': (context) => const SignInScreen(),
         '/chat': (context) => ChatScreen(sohbet:Sohbet(chatId: UserMAnagement.chatID??"", sender:UserMAnagement.sender??"", giver: UserMAnagement.giver??"" ) ,),
       },

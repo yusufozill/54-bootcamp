@@ -30,45 +30,55 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
   }
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.all(8),
-      margin: const EdgeInsets.all(8),
-      constraints: const BoxConstraints(minHeight: 150),
+      decoration: BoxDecoration(boxShadow: [BoxShadow(   color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 1,
+        blurRadius:10,
+        offset: Offset(5,15),)]),
+      child: Stack(
+        children:[ Container(
+          padding: const EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
+          constraints: BoxConstraints(minHeight:150,maxWidth:size.width),
 
-      decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        
-        children: [
-        Row(children: [
-          SizedBox(
-            width: 50,
-            height:50,
-            child: PhotoChart(appUser: widget.matchQuestion.owner),
-          ),
-          
+          decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(10)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+            children: [
+            Row(children: [
+              SizedBox(
+                width: 50,
+                height:50,
+                child: PhotoChart(appUser: widget.matchQuestion.owner),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(matchQuestion.owner),
+              ),
+              const Expanded(child: SizedBox()),
+              Text("${matchQuestion.shareTime.day}/${matchQuestion.shareTime.month}/${matchQuestion.shareTime.year}")
+            ],),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(matchQuestion.owner),
+            child: Text(matchQuestion.question, maxLines: 3, textAlign: TextAlign.center, style: TextStyle(overflow: TextOverflow.ellipsis, ), ),
           ),
-          const Expanded(child: SizedBox()),
-          Text("${matchQuestion.shareTime.day}/${matchQuestion.shareTime.month}/${matchQuestion.shareTime.year}")
-        ],),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [Text(matchQuestion.question)],),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            PurpleButton(answer: matchQuestion.first, function: (_x){
-             cevapla(true);},),
-            PurpleButton(answer: matchQuestion.second, function: (_x){
-              cevapla(false);
-             },),
-          ],
-        )
-      ],),
-      
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                PurpleButton(answer: matchQuestion.first, function: (_x){
+                 cevapla(true);},),
+                PurpleButton(answer: matchQuestion.second, function: (_x){
+                  cevapla(false);
+                 },),
+              ],
+            )
+          ],),
+
+        )],
+      ),
     );
   }
 

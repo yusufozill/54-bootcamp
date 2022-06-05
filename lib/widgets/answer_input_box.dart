@@ -1,3 +1,4 @@
+import 'package:antello/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,18 +14,12 @@ class AnswerInputBox extends StatefulWidget {
 }
 
 class _AnswerInputBoxState extends State<AnswerInputBox> {
-
   @override
   void initState() {
     super.initState();
     widget.controller.addListener(() => setState(() {
-          
-          NewUser.department= widget.controller.text;
-    
-        
-        
-   
-    }));
+          NewUser.department = widget.controller.text;
+        }));
   }
 
   @override
@@ -33,14 +28,13 @@ class _AnswerInputBoxState extends State<AnswerInputBox> {
       width: 320,
       height: 50,
       child: TextField(
-       
         controller: widget.controller,
         maxLength: 20,
         decoration: InputDecoration(
           icon: const Icon(FontAwesomeIcons.book),
-          hintText: "math,biology.....",
+          hintText: "matematik,biyoloji.....",
           hintStyle: const TextStyle(
-            color: Color(0x9526235C),
+            color: AppColors.purple,
             fontStyle: FontStyle.italic,
           ),
           suffixIcon: widget.controller.text.isEmpty
@@ -58,5 +52,4 @@ class _AnswerInputBoxState extends State<AnswerInputBox> {
       ),
     );
   }
-
 }

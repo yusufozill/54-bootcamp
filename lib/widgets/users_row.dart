@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 
 class UsersRow extends StatelessWidget {
-  const UsersRow({ Key? key }) : super(key: key);
+  const UsersRow({Key? key}) : super(key: key);
 
-  List<Widget> widgetlistesiolusturucu(){
-    
+  List<Widget> widgetlistesiolusturucu() {
     return [Container()];
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.all(8),
-    child: Row(
-
-
-      children: widgetlistesiolusturucu(),
-      
-      
-      
-      
+    return Padding(
+      padding: EdgeInsets.all(8),
+      child: Row(
+        children: widgetlistesiolusturucu(),
       ),
     );
   }

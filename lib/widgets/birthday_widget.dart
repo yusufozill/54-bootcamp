@@ -18,7 +18,7 @@ class _BirthdayWidgetState extends State<BirthdayWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text("  when is your birthday ?",
+        Text("  Doğum gününüzü seçiniz ?",
             style: GoogleFonts.raleway(
               fontSize: 24,
             )),

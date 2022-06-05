@@ -1,4 +1,5 @@
 
+import 'package:antello/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +15,7 @@ class DateTimePicker extends StatelessWidget{
       if(    DateTime.now().difference(date) >const Duration(days: 365*18)){
         return "${date.day.toString()}/${date.month.toString()}/${date.year.toString()}";
       } else {
-        return "select your birthday";
+        return "Doğum gününüzü seçiniz";
       }
     }
     return Column(children: [
@@ -28,7 +29,7 @@ class DateTimePicker extends StatelessWidget{
           child: Text(text(),
               style: GoogleFonts.raleway(
                 fontSize: 16,
-                color: const Color(0xFF26235C),
+                color: AppColors.purple,
               )),
           onPressed: () async {
             DateTime? newDate = await showDatePicker(

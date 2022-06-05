@@ -20,7 +20,7 @@ class _StudyWidgetState extends State<StudyWidget> {
     return
      Column(
         children: [
-          Text(" what are you currently studying ?",
+          Text(" Çalıştığın alanlardan bahsedebilir misin?",
               style: GoogleFonts.raleway(
                 fontSize: 24,
               )),

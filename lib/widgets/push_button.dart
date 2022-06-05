@@ -1,3 +1,4 @@
+import 'package:antello/themes/app_colors.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +18,7 @@ class PushButton extends StatelessWidget {
     this.height=50,
     this.fontsize=24,
     required this.butonyazisi,
-    this.backgroundColor= const Color(0xFF26235C) ,
+    this.backgroundColor= AppColors.purple ,
     this.textColor= Colors.white  ,
   }) : super(key: key);
 

@@ -40,7 +40,7 @@ class NewUser {
         "surname": surname,
         "department": department,
         "gender": gender.toString(),
-        "birthday": birthday.toString(),
+        "birthday": birthday.microsecondsSinceEpoch,
         "messages":{},
         "nickname": nickname,
         "bio": bio,

@@ -13,7 +13,7 @@ class PPUpload extends StatefulWidget {
 
 class _PPUploadState extends State<PPUpload> {
   String filePath="";
-  String image="";
+  String? image;
 
    XFile? xFile;
      Future<String>getImage() async {
@@ -25,7 +25,7 @@ class _PPUploadState extends State<PPUpload> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      const PhotoChart(appUser: "", maxsize:400),
+       PhotoChart(appUser:"yusufozill", url: image, maxsize:400),
      
         InkWell   (
           child: const Icon(IconData(0xee39, fontFamily: 'MaterialIcons'), color: Colors.black, size: 40,  )
@@ -40,9 +40,8 @@ class _PPUploadState extends State<PPUpload> {
             
             var mmm= await getImage();
               setState(() {
-                                           
-  UserMAnagement.sampleUser.url=mmm;
-debugPrint(mmm);
+        print(mmm) ;                                   
+ image=mmm;
               }); 
          }
            ),]

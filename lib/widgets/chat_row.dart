@@ -1,12 +1,11 @@
 import 'dart:async';
-
 import 'package:antello/classes/message.dart';
+import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../classes/app_user.dart';
 import '../classes/sohbet.dart';
 import '../screens/chat_screen.dart';
@@ -29,11 +28,19 @@ class _ChatCardState extends State<ChatCard> {
   late DatabaseReference _messagesRef;
   TextEditingController mesajcontroller = TextEditingController();
   late StreamSubscription<DatabaseEvent> _messagesSubscription;
-  AppUser user =AppUser(department: "", gender: "", birthDate: "", ad: "", soyad: "", nickname: "", url: "", bio: "");
+  AppUser user = AppUser(
+      department: "",
+      gender: "",
+      birthDate: DateTime.now(),
+      ad: "",
+      soyad: "",
+      nickname: "",
+      url: "",
+      bio: "");
   @override
   void initState() {
     // TODO: implement initState
-   init();
+    init();
     super.initState();
   }
 
@@ -48,40 +55,40 @@ class _ChatCardState extends State<ChatCard> {
     if (UserMAnagement.username == "") return;
 
     FirebaseDatabase database = FirebaseDatabase.instance;
-    _messagesRef = database.ref("messages").child(widget.chatId).child("messages");
+    _messagesRef =
+        database.ref("messages").child(widget.chatId).child("messages");
 
     final messagesQuery = _messagesRef.limitToLast(1);
 
     _messagesSubscription =
         messagesQuery.onChildAdded.listen((DatabaseEvent event) {
       debugPrint('Child added: ${event.snapshot.value}');
-      mesaj =Message.fromMap(event.snapshot.value as Map);
+      mesaj = Message.fromMap(event.snapshot.value as Map);
 
       (Object o) {
         final error = o as FirebaseException;
         debugPrint('Error: ${error.code} ${error.message}');
       };
     });
-    var a =await FirebaseDatabase.instance.ref("Users/${widget.username}").once();
+    var a =
+        await FirebaseDatabase.instance.ref("Users/${widget.username}").once();
     user = AppUser.fromMap(a.snapshot.value as Map);
-    setState(() {
-      
-    });
-  
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         debugPrint("h");
-                 Navigator.of(context).push(
-
-          MaterialPageRoute(
-            builder: (context) => ChatScreen(
-              sohbet: Sohbet(chatId:widget.chatId,giver: user.nickname,sender: UserMAnagement.sender! ),
-            ),
-          ));
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ChatScreen(
+            sohbet: Sohbet(
+                chatId: widget.chatId,
+                giver: user.nickname,
+                sender: UserMAnagement.sender!),
+          ),
+        ));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -89,7 +96,8 @@ class _ChatCardState extends State<ChatCard> {
           children: [
             Stack(
               children: [
-                const PhotoChart(
+                 PhotoChart(
+                  maxsize:60,
                   appUser: "user",
                 ),
                 // if (yazisma.isActive)
@@ -116,7 +124,8 @@ class _ChatCardState extends State<ChatCard> {
                   Text(
                     user.nickname,
                     style: GoogleFonts.raleway(
-                      color: const Color(0xFF26235C),
+                      fontSize: 20,
+                      color: AppColors.purple,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -133,24 +142,24 @@ class _ChatCardState extends State<ChatCard> {
                 ],
               ),
             )),
-            Column(children: [
-              Opacity(opacity: 0.75, child: Text(mesaj.time.toString())),
+            Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+              Opacity(opacity: 0.75, child: Text("${mesaj.time.hour}:${mesaj.time.minute}"),),
               const SizedBox(
                 height: 5,
               ),
               Container(
-                height: 30,
-                width: 30,
+                height: 20,
+                width: 20,
                 child: Center(
                     child: Text(
                   "1",
                   style: GoogleFonts.raleway(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.w400,
                   ),
                 )),
                 decoration: const BoxDecoration(
-                  color: Colors.red,
+                  color: AppColors.purple,
                   shape: BoxShape.circle,
                 ),
               ),

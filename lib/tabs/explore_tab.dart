@@ -2,6 +2,9 @@ import 'package:antello/classes/app_user.dart';
 import 'package:antello/widgets/user_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../themes/app_colors.dart';
 
 class ExploreTab extends StatefulWidget {
   const ExploreTab({ Key? key }) : super(key: key);
@@ -40,8 +43,18 @@ class _ExploreTabState extends State<ExploreTab> {
   
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(children: userCharts(5) ,),
+    return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor:AppColors.purple,
+          title:Text("Formica",style:GoogleFonts.comfortaa(
+            fontSize:23,
+            fontWeight:FontWeight.bold,
+          ),),
+        ),
+        body: SingleChildScrollView(
+        child: Column(children: userCharts(5) ,),
+      ),
     );
   }
 }

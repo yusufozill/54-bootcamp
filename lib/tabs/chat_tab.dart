@@ -6,6 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../themes/app_colors.dart';
 
 class ChatTab extends StatefulWidget {
   const ChatTab({Key? key}) : super(key: key);
@@ -99,8 +102,20 @@ class _ChatTabState extends State<ChatTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: messagelist,
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor:AppColors.purple,
+        title:Text("Formica",style:GoogleFonts.comfortaa(
+          fontSize:23,
+          fontWeight:FontWeight.bold,
+        ),),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: messagelist,
+        ),
+      ),
     );
   }
 }
