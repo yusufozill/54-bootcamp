@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:antello/classes/app_user.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -31,7 +30,9 @@ trueAnswer=dogrucevap;
 
 FirebaseDatabase.instance.ref("matchQuestions").child(user.nickname).set({
   "question":soru,"firstAnswer":firstAnswer,"secondAnswer":secondAnswer, "answer":dogrucevap, "owner":user.nickname, "time" :shareTime.microsecondsSinceEpoch
-}).then((value) => print("yeni mq gönderildi"));
+})
+//.then((value) => print("yeni mq gönderildi"))
+;
 
 
 }

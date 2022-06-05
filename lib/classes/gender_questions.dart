@@ -10,11 +10,5 @@ class Answers{
 
   }
 
-enum cinsiyetler {
-  kiz,
-  erkek,
-  none
-
-}
 
 

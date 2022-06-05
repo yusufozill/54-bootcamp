@@ -1,6 +1,7 @@
 import 'package:antello/classes/match_question_class.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 
 class AppUser {
   late String ad;
@@ -24,7 +25,9 @@ class AppUser {
       required this.url,
       required this.bio});
 AppUser.fromMap(Map<dynamic, dynamic> map) {
-    print( "nası ya");
+    if (kDebugMode) {
+      print( "nası ya");
+    }
     department = map["department"];
     gender = map["gender"];
     birthDate = map["birthday"];
@@ -33,7 +36,7 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
     nickname = map["nickname"];
     url = map["url"];  
     bio = map["bio"];
-    print(map);
+
   }
 
   get context => null;
@@ -41,26 +44,32 @@ AppUser.fromMap(Map<dynamic, dynamic> map) {
  Future<String> dialogKur(String sender)async {
     UserMAnagement.sender=sender;
     UserMAnagement.giver=nickname;
-   print("from:$sender, to:$nickname");
+   if (kDebugMode) {
+     print("from:$sender, to:$nickname");
+   }
 
 
     var database= FirebaseDatabase.instance;
 
    if(chatID!=null) return chatID!  ;
-    print("salatalık $sender");
+    if (kDebugMode) {
+      print("salatalık $sender");
+    }
   
 
    var a = (await database.ref("buddylists/$sender").get());
-   print(a.value);
-   bool _k =false;
+   if (kDebugMode) {
+     print(a.value);
+   }
    for(var u in ( a.value as Map).entries){
 
     if( u.value.entries.first.key==nickname){
-            print("bu kullanıcıyla daha önce diyalog kurulmuş");
+            if (kDebugMode) {
+              print("bu kullanıcıyla daha önce diyalog kurulmuş");
+            }
         chatID=u.value.entries.first.value;
     UserMAnagement.chatID =chatID;
       if(chatID ==null ) return"";
-       if(sender ==null ) return"";
 
         if(chatID ==nickname ) return"";
 return chatID!;
@@ -74,7 +83,9 @@ return chatID!;
 
 
     String? newChatId= database.ref("messages").push().key;
-    print("newchat =$newChatId");
+    if (kDebugMode) {
+      print("newchat =$newChatId");
+    }
 
    if(newChatId==null) return "" ;
    await database.ref("buddylists/$nickname/$newChatId").update({sender:newChatId});
@@ -86,13 +97,17 @@ return chatID!;
   chatID=newChatId;
     UserMAnagement.chatID =chatID;
     if(chatID ==null ) return"";
-       if(sender ==null ) return"";
+       
 
         if(chatID ==nickname ) return"";
 
-    print("geldim");
+    if (kDebugMode) {
+      print("geldim");
+    }
    
-   print("from:$sender, to:$nickname");
+   if (kDebugMode) {
+     print("from:$sender, to:$nickname");
+   }
 
    
    return newChatId;
@@ -116,7 +131,9 @@ class UserMAnagement {
    var a =await FirebaseDatabase.instance.ref("Users").once();
 
    for(var i in a.snapshot.children){
-     print(i.value as Map);
+     if (kDebugMode) {
+       print(i.value as Map);
+     }
      
      allusers.add(AppUser.fromMap(i.value as Map));
    }
@@ -141,7 +158,9 @@ class UserMAnagement {
         "uid": uid,
       });
     });
-    print("$uid user indirildi");
+    if (kDebugMode) {
+      print("$uid user indirildi");
+    }
 
     return AppUser.fromMap(newmap);
   }

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/match_question_class.dart';
 import 'package:antello/widgets/match_question.dart';
-import 'package:antello/widgets/user_chart.dart';
 import 'package:antello/widgets/user_match_question_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -18,7 +17,6 @@ class MatchTab extends StatefulWidget {
 }
 
 class _MatchTabState extends State<MatchTab> {
-  int _counter = 0;
   late String uid;
   List<Widget> matchwidgets = [];
   Map<String, String> myMessages = {};

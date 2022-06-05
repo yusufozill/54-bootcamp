@@ -11,7 +11,7 @@ class DateTimePicker extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     String text(){
-      if(    DateTime.now().difference(date) >Duration(days: 365*18)){
+      if(    DateTime.now().difference(date) >const Duration(days: 365*18)){
         return "${date.day.toString()}/${date.month.toString()}/${date.year.toString()}";
       } else {
         return "select your birthday";

@@ -1,15 +1,9 @@
-import 'package:antello/screens/home_page.dart';
-import 'package:antello/screens/questions_page.dart';
 import 'package:antello/themes/app_colors.dart';
-import 'package:antello/widgets/purple_button.dart';
 import 'package:antello/widgets/push_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../classes/app_user.dart';
 import '../main.dart';
-import '../utils/authentication.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../widgets/google_sign_in_button.dart';
 import '../widgets/login_widget.dart';
 import '../widgets/sign_up.dart';
 
@@ -92,8 +86,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                      Image(
-                        image:  AssetImage("assets/icon.png"),
+                      const Image(
+                        image:  const AssetImage("assets/icon.png"),
                         width: 200.0,
                       ),
                   const SizedBox(height: 80),
@@ -102,13 +96,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           //    const Expanded(child: Text(""),),
                        
                         
-              !signin ? Text(""):    LoginWidget(
+              !signin ? const Text(""):    LoginWidget(
                     onclickedSignUp: toggle,
                   ),
-               !signup ? Text(""):    SignUp(
+               !signup ? const Text(""):    SignUp(
                     onClickedSignIn: toggle,
                   ),
-                signin || signup ? Text(""):     PushButton(
+                signin || signup ? const Text(""):     PushButton(
                             backgroundColor: AppColors.purple,
                             butonyazisi: "Giriş Yap",
                             function: () {
@@ -120,7 +114,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           const SizedBox(height: 10),
 
-                signup||signin ? Text(""):          PushButton(
+                signup||signin ? const Text(""):          PushButton(
                             textColor: AppColors.purple,
                             backgroundColor: AppColors.background,
                             butonyazisi: "Kayıt Ol",

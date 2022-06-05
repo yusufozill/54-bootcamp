@@ -1,5 +1,3 @@
-import 'package:antello/classes/new_user_informations.dart';
-import 'package:antello/widgets/push_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'answer_input_box.dart';
@@ -15,7 +13,6 @@ class _StudyWidgetState extends State<StudyWidget> {
   @override
   void dispose() {
     controller.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
   @override
@@ -23,12 +20,10 @@ class _StudyWidgetState extends State<StudyWidget> {
     return
      Column(
         children: [
-          Container(
-            child: Text(" what are you currently studying ?",
-                style: GoogleFonts.raleway(
-                  fontSize: 24,
-                )),
-          ),
+          Text(" what are you currently studying ?",
+              style: GoogleFonts.raleway(
+                fontSize: 24,
+              )),
           const SizedBox(
             height: 50,
           ),

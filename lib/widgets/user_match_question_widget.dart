@@ -1,9 +1,7 @@
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/match_question_class.dart';
-import 'package:antello/classes/message.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
-import 'package:antello/widgets/purple_button.dart';
 import 'package:antello/widgets/push_button.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +21,7 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
   TextEditingController questionController = TextEditingController(),
       firstAnswer = TextEditingController(),
       secondAnswer = TextEditingController();
+      FocusNode qfocus=FocusNode(),firstfocus=FocusNode(),secondfocus=FocusNode();
       bool boola=true;
 
   gonder() {
@@ -32,6 +31,7 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
 
   @override
   void initState() {
+
     super.initState();
   }
 
@@ -41,6 +41,7 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
     questionController.dispose();
     firstAnswer.dispose();
     secondAnswer.dispose();
+ 
     super.dispose();
   }
 
@@ -76,7 +77,8 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
               Expanded(
                   flex: 3,
                   child: TextField(
-                         decoration: InputDecoration( focusedBorder: InputBorder.none, focusColor: Colors.white  , hintText: "Bir Soru Sor"),
+                    focusNode: qfocus,
+                         decoration: const InputDecoration( focusedBorder: InputBorder.none, focusColor: Colors.white  , hintText: "Bir Soru Sor"),
             textAlign: TextAlign.center,
             
             cursorColor: AppColors.purple,
@@ -103,10 +105,10 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              InputMatch(secondAnswer: firstAnswer, isThis: boola, funck: (){setState(() {
+              InputMatch(controller: firstAnswer, focus: firstfocus, isThis: boola, funck: (){setState(() {
                 boola=!boola;
               });},),
-              InputMatch(secondAnswer: secondAnswer, isThis: !boola, funck: (){setState(() {
+              InputMatch(controller: secondAnswer, focus:secondfocus,isThis: !boola, funck: (){setState(() {
                 boola=!boola;
               });},),
             ],
@@ -115,6 +117,10 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
             padding: const EdgeInsets.all(8.0),
             child: PushButton(function: (){
               MatchQuestion.fromthings(user: UserMAnagement.appUser!, soru: questionController.text, firstAnswer: firstAnswer.text, secondAnswer: secondAnswer.text, dogrucevap: boola);
+               qfocus.unfocus();
+    firstfocus.unfocus();
+    secondfocus.unfocus();
+
              gonder();
             }, butonyazisi: "gönder", height:40 , width: 100, fontsize: 16,),
           ) 
@@ -128,13 +134,15 @@ class InputMatch extends StatelessWidget {
 
   const InputMatch({
     Key? key,
-    required this.secondAnswer,
+    required this.controller,
     required this.isThis,
+    required this.focus,
     required this.funck,
   }) : super(key: key);
 
-  final TextEditingController secondAnswer;
+  final TextEditingController controller;
   final bool isThis;
+  final FocusNode focus;
   final Function() funck;
 
   @override
@@ -154,15 +162,16 @@ class InputMatch extends StatelessWidget {
             children: [
               
               TextFormField(
-                decoration: InputDecoration(border: InputBorder.none, focusedBorder: InputBorder.none, focusColor: Colors.white),
+                decoration: const InputDecoration(border: InputBorder.none, focusedBorder: InputBorder.none, focusColor: Colors.white),
                   textAlign: TextAlign.center,
                   
                   cursorColor: Colors.white,
-                  controller: secondAnswer,
+                  controller: controller,
+                  focusNode: focus,
                   style: const TextStyle(color: AppColors.white)),
             Align(
               alignment: Alignment.topRight,
-              child: isThis? Icon(Icons.check_box, color: Colors.white,) : Icon(Icons.check_box_outline_blank, color: Colors.white,),
+              child: isThis? const Icon(Icons.check_box, color: Colors.white,) : const Icon(Icons.check_box_outline_blank, color: Colors.white,),
             )
 
 

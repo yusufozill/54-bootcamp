@@ -1,7 +1,6 @@
 import 'package:antello/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../classes/app_user.dart';
 
 class PhotoChart extends StatefulWidget {
   final String appUser;
@@ -40,7 +39,7 @@ class _PhotoChartState extends State<PhotoChart> {
               margin: const EdgeInsets.all(10),
               clipBehavior: Clip.hardEdge,
               child:  FittedBox(
-                  child:    true ? Icon(Icons.person, size: 162,):
+                  child:    true ? const Icon(Icons.person, size: 162,):
               Image.network(
        //      widget. appUser.url
             ""

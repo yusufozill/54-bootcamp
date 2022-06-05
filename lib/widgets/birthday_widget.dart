@@ -18,12 +18,10 @@ class _BirthdayWidgetState extends State<BirthdayWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          child: Text("  when is your birthday ?",
-              style: GoogleFonts.raleway(
-                fontSize: 24,
-              )),
-        ),
+        Text("  when is your birthday ?",
+            style: GoogleFonts.raleway(
+              fontSize: 24,
+            )),
         const SizedBox(
           height: 50,
 

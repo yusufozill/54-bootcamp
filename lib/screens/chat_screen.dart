@@ -5,9 +5,7 @@ import 'package:antello/classes/message.dart';
 import 'package:antello/classes/sohbet.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
-import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,16 +20,11 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
 
-    int _counter = 0;
   late String uid;
   List<Widget> messagelist=[];
   late DatabaseReference _messagesRef;
-  late DatabaseReference _counterRef;
   TextEditingController mesajcontroller=TextEditingController();
-  late StreamSubscription<DatabaseEvent> _counterSubscription;
   late StreamSubscription<DatabaseEvent> _messagesSubscription;
-  bool _anchorToBottom = false;
-    FirebaseException? _error;
   bool initialized = false;
   User? user;
   AppUser giver=AppUser(department: "", gender: "", birthDate: "", ad: "", soyad: "", nickname: "", url: "", bio: "");
@@ -47,10 +40,11 @@ class _ChatScreenState extends State<ChatScreen> {
     // TODO: implement initState
     user= FirebaseAuth.instance.currentUser;
     if (user== null) {
-      Navigator.of(context).pop();
     }else{
       uid=user!.uid;
       UserMAnagement.uid=uid;
+      Navigator.of(context).pop();
+
 
     }
     init();
@@ -119,7 +113,6 @@ class _ChatScreenState extends State<ChatScreen> {
   }
   @override
   Widget build(BuildContext context) {
-      DateTime now =  DateTime.now();
 
     return Scaffold(
       appBar: AppBar(backgroundColor: AppColors.purple, actions: [PhotoChart(appUser: giver.nickname,)], title: Text(giver.nickname),),
@@ -129,30 +122,28 @@ class _ChatScreenState extends State<ChatScreen> {
           alignment: Alignment.bottomCenter,
             child: Column(
               children: [
-                Expanded(child:   Container(
-              child: SingleChildScrollView(
-                
-                reverse: true,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: messagelist,
+                Expanded(child:   SingleChildScrollView(
+                  
+                  reverse: true,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: messagelist,
+                  ),
                 ),
-              ),
-            ),
         ),
                 Container(
                    color: AppColors.background,
                   padding: const EdgeInsets.all(8.0),
                   child: Row(children: [
-                    Expanded(child: TextFormField(decoration: InputDecoration(),keyboardType: TextInputType.text, maxLines: 5, minLines: 1,controller: mesajcontroller,)),
+                    Expanded(child: TextFormField(decoration: const InputDecoration(),keyboardType: TextInputType.text, maxLines: 5, minLines: 1,controller: mesajcontroller,)),
                     IconButton(onPressed: (){
                       widget.sohbet.sendMessage(Message(mesaj: mesajcontroller.text, time: DateTime.now(), sender: widget.sohbet.sender));
                       mesajcontroller.text="";
                       setState(() {
                         
                       });
-                    }, icon: Icon(Icons.send))
+                    }, icon: const Icon(Icons.send))
                   ],),
                 ),
               ],

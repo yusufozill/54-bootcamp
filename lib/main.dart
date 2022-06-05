@@ -2,10 +2,8 @@
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/sohbet.dart';
 import 'package:antello/firebase_options.dart';
-import 'package:antello/scaffold/bottom_navigation_bar.dart';
 import 'package:antello/screens/chat_screen.dart';
 import 'package:antello/screens/home_page.dart';
-import 'package:antello/screens/questions_page.dart';
 import 'package:antello/screens/sign_in_screen.dart';
 import 'package:antello/themes/themes.dart';
 import 'package:antello/utils/email_auth.dart';

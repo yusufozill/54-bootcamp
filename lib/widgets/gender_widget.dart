@@ -16,12 +16,10 @@ class _GenderWidgetState extends State<GenderWidget> {
   Widget build(BuildContext context) {
     return Column(
         children: [
-          Container(
-            child: Text(" what is your gender ?",
-                style: GoogleFonts.raleway(
-                  fontSize: 24,
-                )),
-          ),
+          Text(" what is your gender ?",
+              style: GoogleFonts.raleway(
+                fontSize: 24,
+              )),
           const SizedBox(
             height: 50,
           ),

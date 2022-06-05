@@ -1,13 +1,8 @@
 import 'dart:async';
 
 import 'package:antello/classes/app_user.dart';
-import 'package:antello/classes/message.dart';
-import 'package:antello/classes/sohbet.dart';
-import 'package:antello/screens/chat_screen.dart';
 import 'package:antello/widgets/chat_row.dart';
-import 'package:antello/widgets/pp_upload.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +15,6 @@ class ChatTab extends StatefulWidget {
 }
 
 class _ChatTabState extends State<ChatTab> {
-  int _counter = 0;
   late String uid;
   List<Widget> messagelist = [];
   Map<String, String> myMessages = {};

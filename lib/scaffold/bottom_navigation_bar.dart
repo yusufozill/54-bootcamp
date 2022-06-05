@@ -16,7 +16,7 @@ class BottomNavigationWidget extends StatelessWidget {
           gopage(value);
         },
         currentIndex: currentIndex,
-        items: [
+        items:const [
           BottomNavigationBarItem(
             icon: Icon(Icons.search, color: Colors.black),
             label: "Keşet",

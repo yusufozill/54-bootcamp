@@ -1,16 +1,13 @@
 import 'package:antello/widgets/birthday_widget.dart';
 import 'package:antello/widgets/gender_widget.dart';
 import 'package:antello/widgets/introduction_widget.dart';
-import 'package:antello/widgets/pp_upload.dart';
 import 'package:antello/widgets/study_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../classes/new_user_informations.dart';
-import '../widgets/create_account_input_boxes.dart';
 import '../widgets/push_button.dart';
 
 

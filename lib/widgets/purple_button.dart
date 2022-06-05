@@ -1,6 +1,4 @@
-import 'package:antello/classes/app_user.dart';
 import 'package:antello/themes/app_colors.dart';
-import 'package:antello/widgets/match_question.dart';
 import 'package:flutter/material.dart';
 
 class PurpleButton extends StatelessWidget {
@@ -13,12 +11,12 @@ class PurpleButton extends StatelessWidget {
     return InkWell(
       onTap: () {function(answer);},
       child: Container(
-        constraints: BoxConstraints(minWidth: 60),
+        constraints: const BoxConstraints(minWidth: 60),
         alignment: Alignment.center,
 
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         decoration:BoxDecoration(color: AppColors.purple, borderRadius: BorderRadius.circular(100)),
-        child: Text(answer, style:TextStyle(color: AppColors.white)),
+        child: Text(answer, style:const TextStyle(color: AppColors.white)),
       ),
     );
   }

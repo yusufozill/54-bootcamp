@@ -1,5 +1,3 @@
-import 'package:antello/classes/app_user.dart';
-import 'package:antello/classes/new_user_informations.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 

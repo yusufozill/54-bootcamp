@@ -1,7 +1,5 @@
 import 'package:antello/classes/new_user_informations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class IntroductionInputBox extends StatefulWidget {
   const IntroductionInputBox({Key? key}) : super(key: key);

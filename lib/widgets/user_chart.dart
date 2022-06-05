@@ -1,11 +1,10 @@
-import 'dart:html';
 
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/sohbet.dart';
 import 'package:antello/screens/chat_screen.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
-import 'package:antello/widgets/user_match_question_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -45,7 +44,9 @@ class UserChart extends StatelessWidget {
             InkWell(
               onTap: () async{
                 if(UserMAnagement.user==null){
-                  print("giriş yapılmamış");
+                  if (kDebugMode) {
+                    print("giriş yapılmamış");
+                  }
                   return;
                 }
                 var k= await appUser.dialogKur(UserMAnagement.sender!);
@@ -61,7 +62,9 @@ class UserChart extends StatelessWidget {
 
                }
 
-                print("Pressed on widget");
+                if (kDebugMode) {
+                  print("Pressed on widget");
+                }
               },
               child: Align(
                   alignment: Alignment.bottomCenter,
@@ -95,7 +98,9 @@ class UserChart extends StatelessWidget {
                   PhotoChart(appUser: appUser.nickname,),
                   InkWell(
                     onTap: () {
-                      print("pressed on name");
+                      if (kDebugMode) {
+                        print("pressed on name");
+                      }
                     },
                     child: Text(
                       appUser.ad + " " + appUser.soyad,
@@ -104,7 +109,9 @@ class UserChart extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      print("pressed on bio text");
+                      if (kDebugMode) {
+                        print("pressed on bio text");
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -130,7 +137,9 @@ class UserChart extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        print("pressed on close");
+                        if (kDebugMode) {
+                          print("pressed on close");
+                        }
                       },
                       icon: const Icon(Icons.close),
                     ),

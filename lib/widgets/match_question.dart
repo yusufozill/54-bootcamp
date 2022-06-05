@@ -31,9 +31,9 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.all(8),
-      constraints: BoxConstraints(minHeight: 150),
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
+      constraints: const BoxConstraints(minHeight: 150),
 
       decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(10)),
       child: Column(
@@ -51,7 +51,7 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
             padding: const EdgeInsets.all(8.0),
             child: Text(matchQuestion.owner),
           ),
-          Expanded(child: SizedBox()),
+          const Expanded(child: SizedBox()),
           Text("${matchQuestion.shareTime.day}/${matchQuestion.shareTime.month}/${matchQuestion.shareTime.year}")
         ],),
         Row(

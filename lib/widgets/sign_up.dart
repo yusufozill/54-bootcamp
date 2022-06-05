@@ -2,16 +2,11 @@ import 'package:antello/classes/new_user_informations.dart';
 import 'package:antello/screens/questions_page.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '/utils/email_auth.dart';
-import '../main.dart';
 
 class SignUp extends StatefulWidget {
   final Function(bool, bool) onClickedSignIn;
@@ -48,7 +43,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Form(
         key: formKey,
         child: Column(
@@ -83,8 +78,9 @@ class _SignUpState extends State<SignUp> {
               child: TextFormField(
                 controller: nick,
                 validator: (username) {
-                  if (!(username != null && username != ""))
+                  if (!(username != null && username != "")) {
                     return " Enter a nickname";
+                  }
                   if (nickvalue) return "Bu kullanıcı adı alınmış";
 
                   return null;
@@ -106,7 +102,7 @@ class _SignUpState extends State<SignUp> {
                     email != null && !EmailValidator.validate(email)
                         ? " Enter a valid email"
                         : null,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Email",
                 ),
               ),
@@ -116,7 +112,7 @@ class _SignUpState extends State<SignUp> {
               child: TextFormField(
                 controller: passwordController,
                 textInputAction: TextInputAction.done,
-                decoration: InputDecoration(labelText: "password"),
+                decoration: const InputDecoration(labelText: "password"),
                 obscureText: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (password) => password != null && password.length < 8
@@ -129,7 +125,7 @@ class _SignUpState extends State<SignUp> {
               child: TextFormField(
                 controller: password1,
                 textInputAction: TextInputAction.done,
-                decoration: InputDecoration(labelText: "password again"),
+                decoration: const InputDecoration(labelText: "password again"),
                 obscureText: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (password) =>
@@ -138,16 +134,16 @@ class _SignUpState extends State<SignUp> {
                         : null,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             ElevatedButton.icon(
                 style:
-                    ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50)),
+                    ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
                 onPressed: signUp,
-                icon: Icon(FontAwesomeIcons.lock),
-                label: Text("SignUp")),
-            SizedBox(
+                icon: const Icon(FontAwesomeIcons.lock),
+                label: const Text("SignUp")),
+            const SizedBox(
               height: 40,
             ),
             InkWell(
@@ -189,7 +185,7 @@ class _SignUpState extends State<SignUp> {
      NewUser.nickname=  nick  .text; 
     showDialog(
         context: context,
-        builder: ((context) => Center(
+        builder: ((context) => const Center(
               child: CircularProgressIndicator(),
             )));
     try {

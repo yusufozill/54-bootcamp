@@ -8,10 +8,8 @@ import 'package:antello/tabs/profile_tab.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 import 'package:flutter/material.dart';
 import '../tabs/chat_tab.dart';
-import '../widgets/user_chart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,7 +56,7 @@ late StreamSubscription a ;
   
 
   int tabindex=2;
-  List<Widget> tabs =[ExploreTab(),MatchTab(),ChatTab(),ProfileTab()];
+  List<Widget> tabs =[const ExploreTab(),const MatchTab(),const ChatTab(),const ProfileTab()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +74,7 @@ late StreamSubscription a ;
        tabindex= page;
     });
 
-    controller.animateTo(page, duration: Duration(milliseconds:200));
+    controller.animateTo(page, duration: const Duration(milliseconds:200));
     if(page==3){
     Navigator.of(context).pushNamed("/SignIn");
 

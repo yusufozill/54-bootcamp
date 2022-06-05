@@ -1,8 +1,6 @@
 import 'package:antello/widgets/introduction_input_box.dart';
-import 'package:antello/widgets/push_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'answer_input_box.dart';
 class IntroduceWidget extends StatefulWidget {
   const IntroduceWidget({Key? key}) : super(key: key);
 

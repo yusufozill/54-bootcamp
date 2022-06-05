@@ -24,30 +24,28 @@ class _PPUploadState extends State<PPUpload> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(children: [
-        PhotoChart(appUser: "", maxsize:400),
+    return Column(children: [
+      const PhotoChart(appUser: "", maxsize:400),
      
-          InkWell   (
-            child: const Icon(IconData(0xee39, fontFamily: 'MaterialIcons'), color: Colors.black, size: 40,  )
+        InkWell   (
+          child: const Icon(IconData(0xee39, fontFamily: 'MaterialIcons'), color: Colors.black, size: 40,  )
 
-        ,   onTap: () async{
+      ,   onTap: () async{
+          
+            xFile= await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 25);
+            if (xFile ==null) return ;
+            final finalPath =     FirebaseStorage.instance.ref('spotdatabase').child(DateTime.now().millisecondsSinceEpoch.toString()+".jpg");
+            await finalPath.putData(await xFile!.readAsBytes());
+            filePath=finalPath.fullPath;
             
-              xFile= await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 25);
-              if (xFile ==null) return ;
-              final finalPath =     FirebaseStorage.instance.ref('spotdatabase').child(DateTime.now().millisecondsSinceEpoch.toString()+".jpg");
-              await finalPath.putData(await xFile!.readAsBytes());
-              filePath=finalPath.fullPath;
-              
-              var mmm= await getImage();
-                setState(() {
-                                             
+            var mmm= await getImage();
+              setState(() {
+                                           
   UserMAnagement.sampleUser.url=mmm;
 debugPrint(mmm);
-                }); 
-           }
-             ),]
-      ),
+              }); 
+         }
+           ),]
     );
   }
 }
