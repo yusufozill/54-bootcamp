@@ -151,10 +151,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
-                        IconButton(onPressed:(){}, icon:Icon(FontAwesomeIcons.plus,color:AppColors.purple,)),
+                        IconButton(onPressed:(){}, icon:const Icon(FontAwesomeIcons.plus,color:AppColors.purple,)),
                         Expanded(
                             child: Container(
-                              color:Color(0xFFF7F7FC),
+                              color:const Color(0xFFF7F7FC),
                               child: TextFormField(
                                 cursorColor:AppColors.purple,
                           decoration: const InputDecoration(border:InputBorder.none,),

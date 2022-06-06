@@ -33,9 +33,9 @@ class UserChart extends StatelessWidget {
              boxShadow: [BoxShadow(   color: Colors.grey.withOpacity(0.5),
         spreadRadius: 10,
         blurRadius:10,
-        offset: Offset(5,15),)],
+        offset: const Offset(5,15),)],
               color: AppColors.purple,
-              borderRadius:  BorderRadius.only(
+              borderRadius:  const BorderRadius.only(
                   bottomLeft:  Radius.circular(30),
                   bottomRight: Radius.circular(30),
                   topLeft:  Radius.circular(50),
@@ -65,8 +65,8 @@ class UserChart extends StatelessWidget {
               ///Beyaz alt katman widgeti
                 clipBehavior: Clip.hardEdge,
                 padding: const EdgeInsets.only(top: 8),
-                constraints:BoxConstraints(maxHeight:250,),
-                decoration: BoxDecoration(
+                constraints:const BoxConstraints(maxHeight:250,),
+                decoration: const BoxDecoration(
                   
                     color: Colors.white,
                     borderRadius:  BorderRadius.only(
@@ -85,7 +85,7 @@ class UserChart extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         /// User için profil fotoğrafı [PhotoChart]
                         PhotoChart(appUser: appUser.nickname,),
                         InkWell(

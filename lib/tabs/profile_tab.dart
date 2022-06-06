@@ -1,8 +1,6 @@
-import 'dart:ui';
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
-import '../widgets/profile_appbar.dart';
 import '../widgets/profile_widget.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -42,7 +40,7 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFFFF7F7FC),
+        backgroundColor: const Color(0xffff7f7fc),
       //  appBar: profileAppBar,
         body:  widget.username==null ? Align( alignment: Alignment.topCenter, child:  SignInScreen(singin: signin,)): ProfileWidget(username: widget.username!,),
 

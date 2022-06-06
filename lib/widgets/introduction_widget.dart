@@ -14,12 +14,10 @@ class _IntroduceWidgetState extends State<IntroduceWidget> {
     return
       Column(
         children: [
-          Container(
-            child: Text("Kendini Tanıt",
-                style: GoogleFonts.raleway(
-                  fontSize: 24,
-                )),
-          ),
+          Text("Kendini Tanıt",
+              style: GoogleFonts.raleway(
+                fontSize: 24,
+              )),
           const SizedBox(
             height: 50,
           ),

@@ -99,7 +99,7 @@ class _MatchTabState extends State<MatchTab> {
 
     super.initState();
   }
-  Widget birincieleman=Text("");
+  Widget birincieleman=const Text("");
   tamamfonk(MatchQuestion question){
  // birincieleman=MatchQuestionWidget(matchQuestion: question);
    setState(() {

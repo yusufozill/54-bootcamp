@@ -3,7 +3,6 @@ import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/push_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/login_widget.dart';
 import '../widgets/sign_up.dart';
@@ -74,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Row(children: [Expanded(child: Text(""))],),
+            Row(children:const [ Expanded(child:  Text(""))],),
             const Image(
               image: const AssetImage("assets/icon.png"),
               width: 400,

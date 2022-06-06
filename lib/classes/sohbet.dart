@@ -27,3 +27,4 @@ class Sohbet {
           .update({"isRead": true});
     }
 }
+

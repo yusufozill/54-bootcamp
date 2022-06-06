@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
-import 'dart:html';
 import 'package:antello/classes/message.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
@@ -198,7 +196,7 @@ class _ChatCardState extends State<ChatCard> {
               const SizedBox(
                 height:5
               ),
-            say()==""?Text(""):  Container(
+            say()==""?const Text(""):  Container(
                 height: 20,
                 width: 20,
                 child: Center(

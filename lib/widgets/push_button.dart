@@ -28,7 +28,7 @@ class PushButton extends StatelessWidget {
   Widget build(context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            fixedSize: Size(width, height),
+            //fixedSize: Size(width, height),
             primary: backgroundColor,
             onPrimary: textColor,
             elevation:20,

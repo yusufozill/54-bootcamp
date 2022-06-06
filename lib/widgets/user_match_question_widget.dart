@@ -38,7 +38,6 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     questionController.dispose();
     firstAnswer.dispose();
     secondAnswer.dispose();
@@ -57,7 +56,7 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
           color: Colors.grey.withOpacity(0.5),
           spreadRadius: 5,
           blurRadius: 7,
-          offset: Offset(0, 3), // changes position of shadow
+          offset: const Offset(0, 3), // changes position of shadow
         ),
       ], color: AppColors.white, borderRadius: BorderRadius.circular(50)),
       child: Column(
@@ -193,7 +192,7 @@ class InputMatch extends StatelessWidget {
               color: Colors.grey.withOpacity(0.8),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             )
           ], color: AppColors.purple, borderRadius: BorderRadius.circular(20)),
           child: Stack(

@@ -3,7 +3,6 @@
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/match_question_class.dart';
 import 'package:antello/classes/message.dart';
-import 'package:antello/classes/new_user_informations.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
 import 'package:antello/widgets/purple_button.dart';
@@ -37,7 +36,7 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
       decoration: BoxDecoration(boxShadow: [BoxShadow(   color: Colors.grey.withOpacity(0.5),
         spreadRadius: 1,
         blurRadius:10,
-        offset: Offset(5,15),)]),
+        offset: const Offset(5,15),)]),
       child: Stack(
         children:[ Container(
           padding: const EdgeInsets.all(8),
@@ -65,7 +64,7 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
             ],),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(matchQuestion.question, maxLines: 3, textAlign: TextAlign.center, style: TextStyle(overflow: TextOverflow.ellipsis, ), ),
+            child: Text(matchQuestion.question, maxLines: 3, textAlign: TextAlign.center, style: const TextStyle(overflow: TextOverflow.ellipsis, ), ),
           ),
 
       

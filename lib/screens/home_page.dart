@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/scaffold/bottom_navigation_bar.dart';
+import 'package:antello/screens/questions_page.dart';
 import 'package:antello/tabs/explore_tab.dart';
 import 'package:antello/tabs/match_tab.dart';
 import 'package:antello/tabs/profile_tab.dart';
@@ -52,8 +53,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   int tabindex = 3;
   List<Widget> tabs = [
-    PPUpload(),
-    //const ExploreTab(),
+    
+    const ExploreTab(),
     const MatchTab(),
     const ChatTab(),
      ProfileTab(),

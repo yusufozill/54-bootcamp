@@ -6,26 +6,41 @@ import 'package:flutter/material.dart';
 
 
 class PhotoChart extends StatefulWidget {
-  final String appUser;
-   String? url;
+  String? appUser;
+  String? url;
+  Function()? fun; 
   final double maxsize;
-   PhotoChart({Key? key, required this.appUser, this.url, this.maxsize =100}) : super(key: key);
+   PhotoChart({Key? key, this.appUser, this.url,this.fun, this.maxsize =150}) : super(key: key);
 
   @override
   State<PhotoChart> createState() => _PhotoChartState();
 }
 
 class _PhotoChartState extends State<PhotoChart> {
-  
+   String? url(){
+         if(widget. appUser != null) return widget.appUser!;
+         if(widget.url =="") return null;
+
+         if( widget.url != null) return widget.url!;
+         return null;
+
+      }
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
         debugPrint("profile fotoğrafına basıldı");
+        
+      if(widget.fun!=null) {
+        widget.fun!();
+      };
+      if(widget.url=="") return;
+
         openRoute(context, 
         ProfileTab(username:widget.appUser)
         );
       },
+     
       child: Container(
         constraints:  BoxConstraints(maxHeight: widget.maxsize, maxWidth: widget.maxsize),
         child: Stack(
@@ -50,20 +65,25 @@ class _PhotoChartState extends State<PhotoChart> {
                 margin: const EdgeInsets.all(10),
                 clipBehavior: Clip.hardEdge,
                 child:  FittedBox(
-                    child:    widget.url==null ? const Icon(Icons.person, size: 162,):
-                Image.network(
-               widget.url!
+                    child:    url()==null ?  Icon( widget.url =="" ? Icons.add:Icons.person, size: 162,):
+                SizedBox(
+                  width: widget.maxsize,
+                  height: widget.maxsize,
+                  child: Image.network(
+                    fit: BoxFit.fitWidth,
+                  url()!
             
-                , 
+                  , 
                
-                loadingBuilder:(context, child, loadingProgress) => const LinearProgressIndicator(),
-                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                  return const Text("Frame builder");
-                },
-                errorBuilder: (context, error, stackTrace) {
-                 return  Text(error.toString() + " stack "+  stackTrace.toString(), textAlign: TextAlign.center,) ;
-                },
+                  // loadingBuilder:(context, child, loadingProgress) => const LinearProgressIndicator(),
+                  // frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                  //   return const Text("Frame builder");
+                  // },
+                  errorBuilder: (context, error, stackTrace) {
+                   return  Text(error.toString() + " stack "+  stackTrace.toString(), textAlign: TextAlign.center,) ;
+                  },
 
+                  ),
                 )
               
                 

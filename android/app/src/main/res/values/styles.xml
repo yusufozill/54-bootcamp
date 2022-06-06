@@ -18,6 +18,5 @@
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
  
-<color name="background_color">#0xFF26235C</color>
 
 </resources>

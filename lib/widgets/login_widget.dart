@@ -1,7 +1,5 @@
-import 'dart:ui';
 import 'package:antello/themes/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
 
@@ -44,7 +42,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
     borderRadius:BorderRadius.circular(20),
-    borderSide: BorderSide(
+    borderSide: const BorderSide(
       color: AppColors.purple,
 
     )),
@@ -61,7 +59,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   labelText: "Şifre",
                   border: OutlineInputBorder(
                     borderRadius:BorderRadius.circular(20),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                     color: AppColors.purple,
 
                   )),
@@ -70,7 +68,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(hata, style: TextStyle(color: Colors.red),),
+                child: Text(hata, style: const TextStyle(color: Colors.red),),
               ),
               
               const SizedBox(

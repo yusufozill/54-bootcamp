@@ -2,7 +2,6 @@ import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
 import 'package:antello/widgets/profile_appbar.dart';
 import 'package:antello/widgets/send_message_buton.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,17 +31,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
     super.initState();
   }
-  signout(){
-         FirebaseAuth.instance.signOut();
 
-  }
   @override
   Widget build(BuildContext context) {
 
     return  Scaffold(
        appBar: widget.username ==UserMAnagement.username?null: profileAppBar,
 
-        body: user==null ? Center(child: CircularProgressIndicator(),) : Padding(
+        body: user==null ? const Center(child: CircularProgressIndicator(),) : Padding(
           padding: const EdgeInsets.only(
             top: 20,
           ),
@@ -91,7 +87,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text((user!.ad + " " + user!.soyad).toUpperCase() + " • (" +(DateTime.now().difference(user!.birthDate).inDays/365).toInt().toString()+")" , style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: AppColors.white),),
+                    Text((user!.ad + " " + user!.soyad).toUpperCase() + " • (" +(DateTime.now().difference(user!.birthDate).inDays/365).toInt().toString()+")" , style: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: AppColors.white),),
                  Text("${user!.gender}".toUpperCase()
                                     ,
                                     style: GoogleFonts.raleway(

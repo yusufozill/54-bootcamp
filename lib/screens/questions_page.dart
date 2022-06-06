@@ -1,6 +1,7 @@
 import 'package:antello/widgets/birthday_widget.dart';
 import 'package:antello/widgets/gender_widget.dart';
 import 'package:antello/widgets/introduction_widget.dart';
+import 'package:antello/widgets/pp_upload.dart';
 import 'package:antello/widgets/study_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,8 +13,10 @@ import '../widgets/push_button.dart';
 
 
 class QuestionsPage extends StatefulWidget {
-  User user;
-   QuestionsPage({Key? key,required this.user}) : super(key: key);
+  User? user;
+    QuestionsPage({Key? key,
+   this.user
+  }) : super(key: key);
 
   @override
   _QuestionsPageState createState() => _QuestionsPageState();
@@ -22,7 +25,15 @@ class QuestionsPage extends StatefulWidget {
 class _QuestionsPageState extends State<QuestionsPage> {
   int currentstep = 0;
   PageController pageController = PageController(initialPage: 0);
-
+  List<Widget> list= [
+                  //name surname
+                  //
+                  const GenderWidget(),
+                  const BirthdayWidget(),
+                  const StudyWidget(),
+                  const SingleChildScrollView(child: IntroduceWidget()),
+                  PPUpload(  username: NewUser.nickname),
+                ];
   @override
   void initState() {
    
@@ -67,8 +78,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
           padding: const EdgeInsets.all(10),
           child: Column(children: [
             StepProgressIndicator(
-              totalSteps: 100,
-              currentStep: currentstep,
+              totalSteps: list.length-1,
+              currentStep:currentstep,
               size: 5,
               padding: 0,
               selectedColor: AppColors.purple,
@@ -81,21 +92,16 @@ class _QuestionsPageState extends State<QuestionsPage> {
             Expanded(
               flex: 3,
               child: PageView(
-                onPageChanged: (gecis) {
+                onPageChanged: (value){
+                  currentstep=value;
                   setState(() {
-                    currentstep = gecis * 25;
+                    
                   });
                 },
+              
                 pageSnapping: true,
                 controller: pageController,
-                children: const [
-                  //name surname
-                  //
-                  GenderWidget(),
-                  BirthdayWidget(),
-                  StudyWidget(),
-                  IntroduceWidget(),
-                ],
+                children: list,
               ),
             ),
             Expanded(
@@ -113,11 +119,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
                     pageController.previousPage(
                     duration: const Duration(milliseconds: 10),
                     curve: Curves.bounceInOut);
+             
               
         }
         ),],
           
-               PushButton(butonyazisi:currentstep==75 ?"Tamamla":"Sonraki",
+               PushButton(butonyazisi:currentstep==list.length-1 ?"Tamamla":"Sonraki",
              width: 200,
 
                function:() {
@@ -125,10 +132,11 @@ class _QuestionsPageState extends State<QuestionsPage> {
                     pageController.nextPage(
                     duration: const Duration(milliseconds: 10),
                     curve: Curves.bounceInOut);
-                    if(pageController.page!<3) return;
-                    NewUser.uid=widget.user.uid;
-                NewUser.olustur();
-                Navigator.of(context).pushNamed("/");
+                  
+                //     if(pageController.page!<3) return;
+                //     NewUser.uid=widget.user.uid;
+                // NewUser.olustur();
+                // Navigator.of(context).pushNamed("/");
         }
     
              ),

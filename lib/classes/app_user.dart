@@ -128,6 +128,7 @@ class UserMAnagement {
   static AppUser? appUser;
   static String? chatID;
   static String? sender;
+  static String? url;
 
   static Future<List<AppUser>> randomUser(int count) async {
     allusers = [];

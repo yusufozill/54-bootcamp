@@ -56,7 +56,7 @@ class _SignUpState extends State<SignUp> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius:BorderRadius.circular(20),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: AppColors.purple,
 
                   )),
@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                 decoration: InputDecoration(
                   border:   OutlineInputBorder(
                     borderRadius:BorderRadius.circular(20),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: AppColors.purple,
 
                   )),
@@ -96,7 +96,7 @@ class _SignUpState extends State<SignUp> {
                 decoration:  InputDecoration(
                   border:   OutlineInputBorder(
                     borderRadius:BorderRadius.circular(20),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: AppColors.purple,
 
                   )),
@@ -119,7 +119,7 @@ class _SignUpState extends State<SignUp> {
                   labelText: "Email",
                   border: OutlineInputBorder(
                       borderRadius:BorderRadius.circular(20),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: AppColors.purple,
 
                       )),
@@ -133,7 +133,7 @@ class _SignUpState extends State<SignUp> {
                 textInputAction: TextInputAction.done,
                 decoration:  InputDecoration(labelText: "password", border: OutlineInputBorder(
                     borderRadius:BorderRadius.circular(20),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: AppColors.purple,
 
                     )),),
@@ -151,7 +151,7 @@ class _SignUpState extends State<SignUp> {
                 textInputAction: TextInputAction.done,
                 decoration:  InputDecoration(labelText: "password again", border: OutlineInputBorder(
                     borderRadius:BorderRadius.circular(20),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: AppColors.purple,
 
                     )),),

@@ -12,6 +12,7 @@ class NewUser {
   static String mail = "";
   static String password = "";
   static String bio = "";
+  static String url = "";
 
   static String uid = "";
   static SnackBar customSnackBar({required String content}) {
@@ -44,7 +45,7 @@ class NewUser {
         "messages":{},
         "nickname": nickname,
         "bio": bio,
-        "url":"",
+        "url":url,
 
        
       },
