@@ -70,8 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return  SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
             left: 16.0,
@@ -161,8 +160,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-      ),
-    );
+      ); 
   }
 
   void toggle(bool sin, bool up) => setState(() {

@@ -14,21 +14,25 @@ class ExploreTab extends StatefulWidget {
 }
 
 class _ExploreTabState extends State<ExploreTab> {
-  
+    Map<AppUser,Widget> _i = {};
   
   List<Widget> userCharts(int s){
-    List<Widget> _i = [];
+    if(_i.isNotEmpty) return  _i.values.toList();
+    _i = {};
     for(var i in UserMAnagement.allusers){
-      _i.add(UserChart(appUser: i));
+
+      _i.addAll({i: UserChart(appUser: i)});
 
     }
-    _i.shuffle();
+    
     // while(_i.length<s){
     //   _i.add(UserChart(appUser: UserMAnagement.sampleUser));
       
     // }
+    List<Widget> k= _i.values.toList();
+    k.shuffle();
     
-    return _i;
+    return k;
   }
   @override
   void initState() {

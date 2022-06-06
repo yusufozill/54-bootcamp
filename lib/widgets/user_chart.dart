@@ -133,13 +133,15 @@ class UserChart extends StatelessWidget {
                       },
                       icon: const Icon(Icons.close),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        debugPrint("pressed on information");
-                      },
-                      icon: const Icon(Icons.info),
-                    ),
+                    // IconButton(
+                    //   onPressed: () {
+                    //     debugPrint("pressed on information");
+                    //   },
+                    //   icon: const Icon(Icons.info),
+                    // ),
+              
                   ],
+              
                 ),
               ),
             )

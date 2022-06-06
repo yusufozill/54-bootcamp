@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:antello/classes/app_user.dart';
+import 'package:antello/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/profile_appbar.dart';
 import '../widgets/profile_widget.dart';
@@ -16,7 +17,6 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   void initState() {
    
-    super.initState();
     debugPrint("profil tab");
         if( widget.username!=null) return;
     debugPrint("const boş");
@@ -24,20 +24,22 @@ class _ProfileTabState extends State<ProfileTab> {
         if (UserMAnagement.username==null) {
     debugPrint("offline");
 
-      Navigator.of(context).pushNamed("/SignIn");
+     // Navigator.of(context).pushNamed("/SignIn");
       return;
     }
     debugPrint("online");
 
     widget.username=UserMAnagement.username;
+    super.initState();
+ 
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFFFF7F7FC),
-        appBar: ProfileAppBar,
-        body:  widget.username==null ? CircularProgressIndicator(): ProfileWidget(username: widget.username!,),
+      //  appBar: profileAppBar,
+        body:  widget.username==null ? const SignInScreen(): ProfileWidget(username: widget.username!,),
 
     );
   }
