@@ -10,6 +10,7 @@ class PushButton extends StatelessWidget {
    final double fontsize;
    final Color backgroundColor;
    final Color textColor;
+   final int elevation;
 
    const PushButton({
     Key? key,
@@ -17,6 +18,7 @@ class PushButton extends StatelessWidget {
     this.width=320,
     this.height=50,
     this.fontsize=24,
+     this.elevation=20,
     required this.butonyazisi,
     this.backgroundColor= AppColors.purple ,
     this.textColor= Colors.white  ,
@@ -29,7 +31,7 @@ class PushButton extends StatelessWidget {
             fixedSize: Size(width, height),
             primary: backgroundColor,
             onPrimary: textColor,
-            elevation: 6,
+            elevation:20,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             )),

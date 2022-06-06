@@ -1,10 +1,8 @@
 import 'package:antello/classes/app_user.dart';
+import 'package:antello/widgets/regular_appbar.dart';
 import 'package:antello/widgets/user_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../themes/app_colors.dart';
 
 class ExploreTab extends StatefulWidget {
   const ExploreTab({ Key? key }) : super(key: key);
@@ -14,14 +12,16 @@ class ExploreTab extends StatefulWidget {
 }
 
 class _ExploreTabState extends State<ExploreTab> {
-    Map<AppUser,Widget> _i = {};
+  
+  
+  Map<AppUser,Widget> _i = {};
   
   List<Widget> userCharts(int s){
     if(_i.isNotEmpty) return  _i.values.toList();
     _i = {};
     for(var i in UserMAnagement.allusers){
 
-      _i.addAll({i: UserChart(appUser: i)});
+      _i.addAll({i: UserChart(appUser: i, close:close)});
 
     }
     
@@ -33,6 +33,13 @@ class _ExploreTabState extends State<ExploreTab> {
     k.shuffle();
     
     return k;
+  }
+  close(AppUser user){
+    _i.remove(user);
+    setState(() {
+      
+    });
+     
   }
   @override
   void initState() {
@@ -48,14 +55,7 @@ class _ExploreTabState extends State<ExploreTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor:AppColors.purple,
-          title:Text("Formica",style:GoogleFonts.comfortaa(
-            fontSize:23,
-            fontWeight:FontWeight.bold,
-          ),),
-        ),
+        appBar:RegularAppBar,
         body: SingleChildScrollView(
         child: Column(children: userCharts(5) ,),
       ),

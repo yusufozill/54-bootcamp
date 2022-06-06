@@ -1,9 +1,8 @@
 
 import 'package:antello/classes/app_user.dart';
-import 'package:antello/classes/sohbet.dart';
-import 'package:antello/screens/chat_screen.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,8 +17,10 @@ class UserChart extends StatelessWidget {
   /// Her bir [UserChart] bilgileri çekebileceği [AppUser] nesnesine
   /// ihtiyaç duyar. [appUser] isminin sebebi Auth user ile karışmaması için
   final AppUser appUser;
+  final Function(AppUser) close;
 
-  const UserChart({Key? key, required this.appUser}) : super(key: key);
+ const  UserChart({Key? key, required this.appUser, required this.close }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +31,14 @@ class UserChart extends StatelessWidget {
       ///Beyaz alt katman widgeti
         clipBehavior: Clip.hardEdge,
         padding: const EdgeInsets.only(top: 8),
-        constraints: const BoxConstraints(maxHeight: 250),
-        decoration: const BoxDecoration(
+        constraints:BoxConstraints(maxHeight:250,),
+        decoration: BoxDecoration(
+            boxShadow:[
+              BoxShadow(   color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius:10,
+                offset: Offset(5,15),)
+            ],
             color: Colors.white,
             borderRadius:  BorderRadius.only(
                 bottomLeft:  Radius.circular(30),
@@ -69,7 +76,7 @@ class UserChart extends StatelessWidget {
                       padding:
                           const EdgeInsets.only(left: 12, right: 12, bottom: 12),
                       child: Container(
-                        constraints: const BoxConstraints(maxHeight: 10),
+                        constraints: const BoxConstraints(maxHeight: 10,),
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
@@ -129,19 +136,18 @@ class UserChart extends StatelessWidget {
                       onPressed: () {
                         if (kDebugMode) {
                           debugPrint("pressed on close");
+                          close(appUser);
                         }
                       },
                       icon: const Icon(Icons.close),
                     ),
-                    // IconButton(
-                    //   onPressed: () {
-                    //     debugPrint("pressed on information");
-                    //   },
-                    //   icon: const Icon(Icons.info),
-                    // ),
-              
+                    IconButton(
+                      onPressed: () {
+                        debugPrint("pressed on information");
+                      },
+                      icon: const Icon(Icons.info),
+                    ),
                   ],
-              
                 ),
               ),
             )

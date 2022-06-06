@@ -1,5 +1,4 @@
 import 'package:antello/themes/app_colors.dart';
-import 'package:antello/widgets/profile_appbar.dart';
 import 'package:antello/widgets/push_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +69,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
+    return Scaffold(
+      body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
             left: 16.0,
@@ -85,7 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 children: <Widget>[
                       const Image(
                         image:  const AssetImage("assets/icon.png"),
-                        width: 200.0,
+                        width:400,
                       ),
                   const SizedBox(height: 80),
                 
@@ -109,7 +109,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               });
                             },
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 20),
 
                 signup||signin ? const Text(""):          PushButton(
                             textColor: AppColors.purple,
@@ -123,7 +123,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               });
                             },
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 20),
                   
                   // FutureBuilder(
                   //   future: Authentication.initializeFirebase(context: context),
@@ -160,7 +160,8 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         ),
-      ); 
+      ),
+    );
   }
 
   void toggle(bool sin, bool up) => setState(() {

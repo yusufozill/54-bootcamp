@@ -38,7 +38,7 @@ class _ProfileTabState extends State<ProfileTab> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFFFF7F7FC),
-      //  appBar: profileAppBar,
+        appBar: profileAppBar,
         body:  widget.username==null ? const SignInScreen(): ProfileWidget(username: widget.username!,),
 
     );

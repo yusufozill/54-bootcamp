@@ -3,13 +3,13 @@ import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/message.dart';
 import 'package:antello/classes/sohbet.dart';
 import 'package:antello/themes/app_colors.dart';
-import 'package:antello/widgets/photo_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../widgets/chat_screen_app_bar.dart';
 
-import '../widgets/profile_appbar.dart';
 
 class ChatScreen extends StatefulWidget {
   final Sohbet sohbet;
@@ -123,7 +123,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: profileAppBar,
+        appBar: ChatScreenAppBar,
         body: Align(
           alignment: Alignment.bottomCenter,
           child: Column(
@@ -139,18 +139,23 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
               Container(
-                color: AppColors.background,
+                color:Colors.white ,
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
+                    IconButton(onPressed:(){}, icon:Icon(FontAwesomeIcons.plus,color:AppColors.purple,)),
                     Expanded(
-                        child: TextFormField(
-                      decoration: const InputDecoration(),
+                        child: Container(
+                          color:Color(0xFFF7F7FC),
+                          child: TextFormField(
+                            cursorColor:AppColors.purple,
+                      decoration: const InputDecoration(border:InputBorder.none,),
                       keyboardType: TextInputType.text,
                       maxLines: 5,
                       minLines: 1,
                       controller: mesajcontroller,
-                    )),
+                    ),
+                        )),
                     IconButton(
                         onPressed: () {
                           widget.sohbet.sendMessage(Message(
@@ -160,7 +165,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           mesajcontroller.text = "";
                           setState(() {});
                         },
-                        icon: const Icon(Icons.send))
+                        icon: const Icon(Icons.send,color: AppColors.purple,))
                   ],
                 ),
               ),

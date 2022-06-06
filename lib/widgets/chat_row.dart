@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../classes/app_user.dart';
 import '../classes/sohbet.dart';
 import '../screens/chat_screen.dart';
@@ -22,7 +23,7 @@ class ChatCard extends StatefulWidget {
 
 class _ChatCardState extends State<ChatCard> {
   late String uid;
-  Message mesaj = Message(mesaj: "...", time: DateTime.now(), sender: "sender");
+  Message mesaj = Message(mesaj: "...", time:DateTime.now(), sender: "sender");
   List<Widget> messagelist = [];
   Map<String, String> myMessages = {};
   late DatabaseReference _messagesRef;
@@ -143,9 +144,9 @@ class _ChatCardState extends State<ChatCard> {
               ),
             )),
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-              Opacity(opacity: 0.75, child: Text("${mesaj.time.hour}:${mesaj.time.minute}"),),
+              Opacity(opacity: 0.75, child:Text(DateFormat("KK:mm").format(mesaj.time))),
               const SizedBox(
-                height: 5,
+                height:5
               ),
               Container(
                 height: 20,
@@ -163,7 +164,7 @@ class _ChatCardState extends State<ChatCard> {
                   shape: BoxShape.circle,
                 ),
               ),
-            ]),
+    ]),
           ],
         ),
       ),

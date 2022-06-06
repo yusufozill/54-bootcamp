@@ -6,7 +6,6 @@ import 'package:antello/tabs/explore_tab.dart';
 import 'package:antello/tabs/match_tab.dart';
 import 'package:antello/tabs/profile_tab.dart';
 import 'package:antello/themes/app_colors.dart';
-import 'package:antello/widgets/pp_upload.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late TabController controller;
+
   late StreamSubscription a;
   @override
   void initState() {
@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
         backgroundColor: AppColors.background,
         bottomNavigationBar: BottomNavigationWidget(
+          bottomnavigationcontroller:controller,
           gopage: goPage,
           currentIndex: tabindex,
         ),

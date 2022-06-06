@@ -21,12 +21,12 @@ class Message {
 
  Widget toWidget(){
 
-   return   BubbleSpecialTwo(
+   return   BubbleSpecialOne(
                     text: mesaj,
-                    tail: false,
-                    color:  sender==UserMAnagement.sender ? const Color(0xFFE8E8EE): AppColors.purple,
+                    tail:false,
+                    color:  sender==UserMAnagement.sender ?  AppColors.purple: const Color(0xFF9082EC),
                     delivered: true,
-                    textStyle:  sender==UserMAnagement.sender ? TextStyle(color: AppColors.purple):TextStyle(color: AppColors.white),
+                    textStyle:  sender==UserMAnagement.sender ? TextStyle(color: Colors.white):TextStyle(color: AppColors.white),
                     isSender:sender==UserMAnagement.sender,
                   );
    

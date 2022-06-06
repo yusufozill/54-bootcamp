@@ -65,16 +65,24 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
             padding: const EdgeInsets.all(8.0),
             child: Text(matchQuestion.question, maxLines: 3, textAlign: TextAlign.center, style: TextStyle(overflow: TextOverflow.ellipsis, ), ),
           ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                PurpleButton(answer: matchQuestion.first, function: (_x){
-                 cevapla(true);},),
-                PurpleButton(answer: matchQuestion.second, function: (_x){
-                  cevapla(false);
-                 },),
-              ],
-            )
+
+      
+          Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: PurpleButton(answer: matchQuestion.first, function: (_x){
+                       cevapla(true);},),
+                    ),
+                    Expanded(
+                      child: PurpleButton(answer: matchQuestion.second, function: (_x){
+                        cevapla(false);
+                       },),
+                    ),
+                  ],
+                ),
+        
+
           ],),
 
         )],

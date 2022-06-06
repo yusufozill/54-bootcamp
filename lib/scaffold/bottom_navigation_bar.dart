@@ -5,14 +5,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   void Function(int) gopage;
+  late TabController bottomnavigationcontroller;
   int currentIndex;
   BottomNavigationWidget(
-      {Key? key, required this.gopage, required this.currentIndex})
+      {Key? key, required this.gopage, required this.currentIndex,required this.bottomnavigationcontroller})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+       showSelectedLabels: true,
         selectedItemColor: AppColors.purple,
         unselectedItemColor: AppColors.purple.withOpacity(0.55),
         onTap: (value) {

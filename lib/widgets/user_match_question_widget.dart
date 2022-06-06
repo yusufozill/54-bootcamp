@@ -52,6 +52,14 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
       margin: const EdgeInsets.all(8),
       constraints: const BoxConstraints(minHeight: 200),
       decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
           color: AppColors.white, borderRadius: BorderRadius.circular(50)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -115,7 +123,7 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
           )
           , Padding(
             padding: const EdgeInsets.all(8.0),
-            child: PushButton(function: (){
+            child: PushButton(elevation:100,function: (){
               MatchQuestion.fromthings(user: UserMAnagement.appUser!, soru: questionController.text, firstAnswer: firstAnswer.text, secondAnswer: secondAnswer.text, dogrucevap: boola);
                qfocus.unfocus();
     firstfocus.unfocus();
@@ -156,6 +164,12 @@ class InputMatch extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
+              boxShadow:[BoxShadow(
+                color: Colors.grey.withOpacity(0.8),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0,3), // changes position of shadow
+              )],
               color: AppColors.purple,
               borderRadius: BorderRadius.circular(20)),
           child: Stack(

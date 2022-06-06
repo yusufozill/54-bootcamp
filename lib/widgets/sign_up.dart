@@ -4,8 +4,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import '../themes/app_colors.dart';
 import '/utils/email_auth.dart';
 
 class SignUp extends StatefulWidget {
@@ -54,8 +53,13 @@ class _SignUpState extends State<SignUp> {
                 controller: isim,
                 validator: (email) =>
                     !(email != null && email != "") ? " Enter a name" : null,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius:BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                    color: AppColors.purple,
+
+                  )),
                   labelText: 'İsim',
                 ),
               ),
@@ -66,8 +70,13 @@ class _SignUpState extends State<SignUp> {
                 controller: soyisim,
                 validator: (email) =>
                     !(email != null && email != "") ? " Enter a surname" : null,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
+                decoration: InputDecoration(
+                  border:   OutlineInputBorder(
+                    borderRadius:BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                    color: AppColors.purple,
+
+                  )),
                   labelText: 'Soyisim',
                 ),
               ),
@@ -84,8 +93,13 @@ class _SignUpState extends State<SignUp> {
 
                   return null;
                 },
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
+                decoration:  InputDecoration(
+                  border:   OutlineInputBorder(
+                    borderRadius:BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                    color: AppColors.purple,
+
+                  )),
                   labelText: 'Kullanıcı Adı',
                 ),
               ),
@@ -101,8 +115,14 @@ class _SignUpState extends State<SignUp> {
                     email != null && !EmailValidator.validate(email)
                         ? " Enter a valid email"
                         : null,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: "Email",
+                  border: OutlineInputBorder(
+                      borderRadius:BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                        color: AppColors.purple,
+
+                      )),
                 ),
               ),
             ),
@@ -111,7 +131,12 @@ class _SignUpState extends State<SignUp> {
               child: TextFormField(
                 controller: passwordController,
                 textInputAction: TextInputAction.done,
-                decoration: const InputDecoration(labelText: "password"),
+                decoration:  InputDecoration(labelText: "password", border: OutlineInputBorder(
+                    borderRadius:BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: AppColors.purple,
+
+                    )),),
                 obscureText: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (password) => password != null && password.length < 8
@@ -124,7 +149,12 @@ class _SignUpState extends State<SignUp> {
               child: TextFormField(
                 controller: password1,
                 textInputAction: TextInputAction.done,
-                decoration: const InputDecoration(labelText: "password again"),
+                decoration:  InputDecoration(labelText: "password again", border: OutlineInputBorder(
+                    borderRadius:BorderRadius.circular(20),
+                    borderSide: BorderSide(
+                      color: AppColors.purple,
+
+                    )),),
                 obscureText: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (password) =>
@@ -136,12 +166,16 @@ class _SignUpState extends State<SignUp> {
             const SizedBox(
               height: 40,
             ),
-            ElevatedButton.icon(
+            ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50)),
+
+                        primary: AppColors.purple,
+                        minimumSize: const Size.fromHeight(50),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20))),
                 onPressed: signUp,
-                icon: const Icon(FontAwesomeIcons.lock),
-                label: const Text("SignUp")),
+
+                child: const Text("Kayıt Ol")),
             const SizedBox(
               height: 40,
             ),
@@ -150,7 +184,7 @@ class _SignUpState extends State<SignUp> {
                 widget.onClickedSignIn(true, false);
               },
               child: const Text(
-                "Sign in",
+                "Giriş Yap",
                 style: TextStyle(
                     fontSize: 15,
                     color: Color(0xFF26235C),

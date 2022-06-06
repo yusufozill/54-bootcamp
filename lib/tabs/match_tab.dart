@@ -1,16 +1,13 @@
 import 'dart:async';
-import 'dart:ui';
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/match_question_class.dart';
 import 'package:antello/widgets/match_question.dart';
+import 'package:antello/widgets/regular_appbar.dart';
 import 'package:antello/widgets/user_match_question_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../themes/app_colors.dart';
-
 class MatchTab extends StatefulWidget {
 
  const MatchTab({ Key? key }) : super(key: key);
@@ -119,14 +116,7 @@ class _MatchTabState extends State<MatchTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
-        centerTitle: true,
-        backgroundColor:AppColors.purple,
-        title:Text("Formica",style:GoogleFonts.comfortaa(
-          fontSize:23,
-          fontWeight:FontWeight.bold,
-        ),),
-      ),
+      appBar:RegularAppBar,
      body: SingleChildScrollView(
             child: Column(children: [ birincieleman] + matchwidgets ,),
           ),
