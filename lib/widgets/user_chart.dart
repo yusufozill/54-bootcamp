@@ -26,131 +26,129 @@ class UserChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       ///Bu padding parent widget içinde bir padding oluşturur
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(40.0),
       child: Container(
-      ///Beyaz alt katman widgeti
-        clipBehavior: Clip.hardEdge,
-        padding: const EdgeInsets.only(top: 8),
-        constraints:BoxConstraints(maxHeight:250,),
-        decoration: BoxDecoration(
-            boxShadow:[
-              BoxShadow(   color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius:10,
-                offset: Offset(5,15),)
-            ],
-            color: Colors.white,
-            borderRadius:  BorderRadius.only(
-                bottomLeft:  Radius.circular(30),
-                bottomRight: Radius.circular(30),
-                topLeft:  Radius.circular(50),
-                topRight: Radius.circular(50),
-                )),
+        padding: const EdgeInsets.only(bottom: 10)
+          , decoration: BoxDecoration(
+             boxShadow: [BoxShadow(   color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 10,
+        blurRadius:10,
+        offset: Offset(5,15),)],
+              color: AppColors.purple,
+              borderRadius:  BorderRadius.only(
+                  bottomLeft:  Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                  topLeft:  Radius.circular(50),
+                  topRight: Radius.circular(50),
+                  )),
+        
         child: Stack(
           children: [
             InkWell(
-              onTap: () async{
-                if(UserMAnagement.user==null){
-                  if (kDebugMode) {
-                    debugPrint("giriş yapılmamış");
-                  }
-                  return;
-                }
-             
-              UserMAnagement.sendAndShow(UserMAnagement.username, appUser.nickname, context);
+              splashColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+                   onTap: () async{
+                      if(UserMAnagement.user==null){
+                        if (kDebugMode) {
+                          debugPrint("giriş yapılmamış");
+                        }
+                        return;
+                      }
+                   
+                    UserMAnagement.sendAndShow(UserMAnagement.username, appUser.nickname, context);
 
-                if (kDebugMode) {
-                  debugPrint("Pressed on widget");
-                }
-              },
-              child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: AppColors.purple,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30))),
-                    height: 50,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 12, right: 12, bottom: 12),
-                      child: Container(
-                        constraints: const BoxConstraints(maxHeight: 10,),
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(30),
-                                bottomRight: Radius.circular(30))),
-                      ),
-                    ),
-                  )),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  /// User için profil fotoğrafı [PhotoChart]
-                  PhotoChart(appUser: appUser.nickname,),
-                  InkWell(
-                    onTap: () {
                       if (kDebugMode) {
-                        debugPrint("pressed on name");
+                        debugPrint("Pressed on widget");
                       }
                     },
-                    child: Text(
-                      appUser.ad + " " + appUser.soyad,
-                      style: GoogleFonts.oswald(fontWeight: FontWeight.bold),
+              child: Container(
+              ///Beyaz alt katman widgeti
+                clipBehavior: Clip.hardEdge,
+                padding: const EdgeInsets.only(top: 8),
+                constraints:BoxConstraints(maxHeight:250,),
+                decoration: BoxDecoration(
+                  
+                    color: Colors.white,
+                    borderRadius:  BorderRadius.only(
+                        bottomLeft:  Radius.circular(30),
+                        bottomRight: Radius.circular(30),
+                        topLeft:  Radius.circular(50),
+                        topRight: Radius.circular(50),
+                        )),
+               
+              ),
+            ),
+            
+        
+            Align(
+                    alignment: Alignment.topCenter,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 10,),
+                        /// User için profil fotoğrafı [PhotoChart]
+                        PhotoChart(appUser: appUser.nickname,),
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          onTap: () {
+                            if (kDebugMode) {
+                              debugPrint("pressed on name");
+                            }
+                          },
+                          child: Text(
+                            appUser.ad + " " + appUser.soyad,
+                            style: GoogleFonts.oswald(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            if (kDebugMode) {
+                              debugPrint("pressed on bio text");
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 16, right: 16, top: 8, bottom: 8),
+                            child: Text(
+                              "    " + appUser.bio,
+                              style: GoogleFonts.oswald(fontWeight: FontWeight.w100),
+                              textAlign: TextAlign.justify,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 4,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      if (kDebugMode) {
-                        debugPrint("pressed on bio text");
-                      }
-                    },
+                  Align(
+                    alignment: Alignment.topRight,
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 16, right: 16, top: 8, bottom: 8),
-                      child: Text(
-                        "    " + appUser.bio,
-                        style: GoogleFonts.oswald(fontWeight: FontWeight.w100),
-                        textAlign: TextAlign.justify,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 4,
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Column(
+                        children: [
+                          IconButton(
+                            hoverColor: Colors.transparent,
+                            onPressed: () {
+                              if (kDebugMode) {
+                                debugPrint("pressed on close");
+                                close(appUser);
+                              }
+                            },
+                            icon: const Icon(Icons.close),
+                          ),
+                          // IconButton(
+                          //   onPressed: () {
+                          //     debugPrint("pressed on information");
+                          //   },
+                          //   icon: const Icon(Icons.info),
+                          // ),
+                        ],
                       ),
                     ),
                   )
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        if (kDebugMode) {
-                          debugPrint("pressed on close");
-                          close(appUser);
-                        }
-                      },
-                      icon: const Icon(Icons.close),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        debugPrint("pressed on information");
-                      },
-                      icon: const Icon(Icons.info),
-                    ),
-                  ],
-                ),
-              ),
-            )
+             
           ],
         ),
       ),

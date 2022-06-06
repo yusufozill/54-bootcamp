@@ -1,5 +1,6 @@
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
+import 'package:antello/widgets/profile_appbar.dart';
 import 'package:antello/widgets/send_message_buton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,7 +34,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
     return SingleChildScrollView(
       child: Scaffold(
-
+        appBar: UserMAnagement.user==widget.username ? profileAppBar: null,
         body: user==null ? Center(child: CircularProgressIndicator(),) : Padding(
           padding: const EdgeInsets.only(
             top: 20,

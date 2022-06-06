@@ -16,19 +16,21 @@ class ChatTab extends StatefulWidget {
 }
 
 class _ChatTabState extends State<ChatTab> {
-  late String uid;
+   String? uid;
   List<Widget> messagelist = [];
   Map<String, String> myMessages = {};
-  late DatabaseReference _messagesRef;
+   DatabaseReference? _messagesRef;
   TextEditingController mesajcontroller = TextEditingController();
-  late StreamSubscription<DatabaseEvent> _messagesSubscription;
+   StreamSubscription<DatabaseEvent>? _messagesSubscription;
   User? user;
   @override
   void dispose() {
     // TODO: implement dispose
     // _counterSubscription.cancel();
-    _messagesSubscription.cancel();
     super.dispose();
+
+    if( _messagesSubscription==null) return;
+    _messagesSubscription!.cancel();
   }
 
   @override
@@ -58,7 +60,7 @@ class _ChatTabState extends State<ChatTab> {
 
     UserMAnagement.sender = UserMAnagement.username;
     _messagesRef = database.ref("buddylists").child(UserMAnagement.sender!);
-    _messagesRef.get().then((value) => debugPrint(value.value.toString()));
+    _messagesRef!.get().then((value) => debugPrint(value.value.toString()));
 
     database.setLoggingEnabled(false);
     if (!kIsWeb) {
@@ -66,7 +68,7 @@ class _ChatTabState extends State<ChatTab> {
       database.setPersistenceCacheSizeBytes(1000);
     }
 
-      final messagesQuery = _messagesRef.limitToLast(25);
+      final messagesQuery = _messagesRef!.limitToLast(25);
 
     _messagesSubscription = messagesQuery.onChildAdded.listen(
       (DatabaseEvent event) {

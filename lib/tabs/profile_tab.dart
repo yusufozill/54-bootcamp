@@ -17,7 +17,9 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   void initState() {
    
-    debugPrint("profil tab");
+ 
+    super.initState();
+       debugPrint("profil tab");
         if( widget.username!=null) return;
     debugPrint("const boş");
 
@@ -30,7 +32,6 @@ class _ProfileTabState extends State<ProfileTab> {
     debugPrint("online");
 
     widget.username=UserMAnagement.username;
-    super.initState();
  
   }
 
@@ -38,8 +39,8 @@ class _ProfileTabState extends State<ProfileTab> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFFFF7F7FC),
-        appBar: profileAppBar,
-        body:  widget.username==null ? const SignInScreen(): ProfileWidget(username: widget.username!,),
+      //  appBar: profileAppBar,
+        body:  widget.username==null ? Align( alignment: Alignment.topCenter, child: const SignInScreen()): ProfileWidget(username: widget.username!,),
 
     );
   }
