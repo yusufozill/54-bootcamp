@@ -21,8 +21,10 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
   TextEditingController questionController = TextEditingController(),
       firstAnswer = TextEditingController(),
       secondAnswer = TextEditingController();
-      FocusNode qfocus=FocusNode(),firstfocus=FocusNode(),secondfocus=FocusNode();
-      bool boola=true;
+  FocusNode qfocus = FocusNode(),
+      firstfocus = FocusNode(),
+      secondfocus = FocusNode();
+  bool boola = true;
 
   gonder() {
     MatchQuestion yenisoru = UserMAnagement.sampleQuestion;
@@ -31,7 +33,6 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
 
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -41,7 +42,7 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
     questionController.dispose();
     firstAnswer.dispose();
     secondAnswer.dispose();
- 
+
     super.dispose();
   }
 
@@ -51,16 +52,14 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       constraints: const BoxConstraints(minHeight: 200),
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-          color: AppColors.white, borderRadius: BorderRadius.circular(50)),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: Offset(0, 3), // changes position of shadow
+        ),
+      ], color: AppColors.white, borderRadius: BorderRadius.circular(50)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -75,8 +74,8 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(widget.user.ad + " " + widget.user.soyad),
               ),
-             // const Expanded(child: Center(child: Text("Bir Soru Bırak"))),
-            //  Text(DateTime.now().toString())
+              // const Expanded(child: Center(child: Text("Bir Soru Bırak"))),
+              //  Text(DateTime.now().toString())
             ],
           ),
           Padding(
@@ -86,10 +85,12 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
                   flex: 3,
                   child: TextField(
                     focusNode: qfocus,
-                         decoration: const InputDecoration( focusedBorder: InputBorder.none, focusColor: Colors.white  , hintText: "Bir Soru Sor"),
-            textAlign: TextAlign.center,
-            
-            cursorColor: AppColors.purple,
+                    decoration: const InputDecoration(
+                        focusedBorder: InputBorder.none,
+                        focusColor: Colors.white,
+                        hintText: "Bir Soru Sor"),
+                    textAlign: TextAlign.center,
+                    cursorColor: AppColors.purple,
                     controller: questionController,
                   )),
               // ElevatedButton(
@@ -99,7 +100,7 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
               //         elevation: 6,
               //         shape: const CircleBorder()),
               //     onPressed: () => {
-                        
+
               //           gonder(),
               //           debugPrint(firstAnswer.text),
               //           debugPrint(secondAnswer.text)
@@ -107,31 +108,56 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
               //     child: const Text(
               //       "+",
               //     ))
-          
             ]),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              InputMatch(controller: firstAnswer, focus: firstfocus, isThis: boola, funck: (){setState(() {
-                boola=!boola;
-              });},),
-              InputMatch(controller: secondAnswer, focus:secondfocus,isThis: !boola, funck: (){setState(() {
-                boola=!boola;
-              });},),
+              InputMatch(
+                controller: firstAnswer,
+                focus: firstfocus,
+                isThis: boola,
+                funck: () {
+                  setState(() {
+                    boola = !boola;
+                  });
+                },
+              ),
+              InputMatch(
+                controller: secondAnswer,
+                focus: secondfocus,
+                isThis: !boola,
+                funck: () {
+                  setState(() {
+                    boola = !boola;
+                  });
+                },
+              ),
             ],
-          )
-          , Padding(
+          ),
+          Padding(
             padding: const EdgeInsets.all(8.0),
-            child: PushButton(elevation:100,function: (){
-              MatchQuestion.fromthings(user: UserMAnagement.appUser!, soru: questionController.text, firstAnswer: firstAnswer.text, secondAnswer: secondAnswer.text, dogrucevap: boola);
-               qfocus.unfocus();
-    firstfocus.unfocus();
-    secondfocus.unfocus();
+            child: PushButton(
+              elevation: 100,
+              function: () {
+                MatchQuestion.fromthings(
+                    user: UserMAnagement.appUser!,
+                    soru: questionController.text,
+                    firstAnswer: firstAnswer.text,
+                    secondAnswer: secondAnswer.text,
+                    dogrucevap: boola);
+                qfocus.unfocus();
+                firstfocus.unfocus();
+                secondfocus.unfocus();
 
-             gonder();
-            }, butonyazisi: "gönder", height:40 , width: 100, fontsize: 16,),
-          ) 
+                gonder();
+              },
+              butonyazisi: "gönder",
+              height: 40,
+              width: 100,
+              fontsize: 16,
+            ),
+          )
         ],
       ),
     );
@@ -139,7 +165,6 @@ class _UserMatchQuestionWidgetState extends State<UserMatchQuestionWidget> {
 }
 
 class InputMatch extends StatelessWidget {
-
   const InputMatch({
     Key? key,
     required this.controller,
@@ -163,32 +188,38 @@ class InputMatch extends StatelessWidget {
           alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(horizontal: 20),
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-              boxShadow:[BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0,3), // changes position of shadow
-              )],
-              color: AppColors.purple,
-              borderRadius: BorderRadius.circular(20)),
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.8),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            )
+          ], color: AppColors.purple, borderRadius: BorderRadius.circular(20)),
           child: Stack(
             children: [
-              
               TextFormField(
-                decoration: const InputDecoration(border: InputBorder.none, focusedBorder: InputBorder.none, focusColor: Colors.white),
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      focusColor: Colors.white),
                   textAlign: TextAlign.center,
-                  
                   cursorColor: Colors.white,
                   controller: controller,
                   focusNode: focus,
                   style: const TextStyle(color: AppColors.white)),
-            Align(
-              alignment: Alignment.topRight,
-              child: isThis? const Icon(Icons.check_box, color: Colors.white,) : const Icon(Icons.check_box_outline_blank, color: Colors.white,),
-            )
-
-
+              Align(
+                alignment: Alignment.topRight,
+                child: isThis
+                    ? const Icon(
+                        Icons.check_box,
+                        color: Colors.white,
+                      )
+                    : const Icon(
+                        Icons.check_box_outline_blank,
+                        color: Colors.white,
+                      ),
+              )
             ],
           ),
         ),

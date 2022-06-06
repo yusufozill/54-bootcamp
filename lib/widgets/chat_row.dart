@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:developer';
+import 'dart:html';
 import 'package:antello/classes/message.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
@@ -22,6 +24,7 @@ class ChatCard extends StatefulWidget {
 }
 
 class _ChatCardState extends State<ChatCard> {
+  Map<String,Message> mesajlar={};
   late String uid;
   Message mesaj = Message(mesaj: "...", time:DateTime.now(), sender: "sender");
   List<Widget> messagelist = [];
@@ -29,6 +32,9 @@ class _ChatCardState extends State<ChatCard> {
   late DatabaseReference _messagesRef;
   TextEditingController mesajcontroller = TextEditingController();
   late StreamSubscription<DatabaseEvent> _messagesSubscription;
+  late StreamSubscription<DatabaseEvent> _changeSubscrit;
+
+
   AppUser user = AppUser(
       department: "",
       gender: "",
@@ -42,6 +48,7 @@ class _ChatCardState extends State<ChatCard> {
   void initState() {
     // TODO: implement initState
     init();
+
     super.initState();
   }
 
@@ -49,6 +56,7 @@ class _ChatCardState extends State<ChatCard> {
   void dispose() {
     // TODO: implement dispose
     _messagesSubscription.cancel();
+    _changeSubscrit.cancel();
     super.dispose();
   }
 
@@ -59,12 +67,18 @@ class _ChatCardState extends State<ChatCard> {
     _messagesRef =
         database.ref("messages").child(widget.chatId).child("messages");
 
-    final messagesQuery = _messagesRef.limitToLast(1);
+    final messagesQuery = _messagesRef.limitToLast(4);
 
     _messagesSubscription =
         messagesQuery.onChildAdded.listen((DatabaseEvent event) {
       debugPrint('Child added: ${event.snapshot.value}');
       mesaj = Message.fromMap(event.snapshot.value as Map);
+
+      mesajlar.addAll({event.snapshot.key!:mesaj});
+      setState(() {
+        
+      });
+      
 
       (Object o) {
         final error = o as FirebaseException;
@@ -74,9 +88,45 @@ class _ChatCardState extends State<ChatCard> {
     var a =
         await FirebaseDatabase.instance.ref("Users/${widget.username}").once();
     user = AppUser.fromMap(a.snapshot.value as Map);
+
+     _changeSubscrit=   messagesQuery.onChildChanged.listen((DatabaseEvent event) {
+      debugPrint('Child added: ${event.snapshot.value}');
+      mesaj = Message.fromMap(event.snapshot.value as Map);
+
+      if(mesaj.isRead){
+        mesajlar.remove(event.snapshot.key!);
+        setState(() {
+          
+        });
+      }
+      
+
+      (Object o) {
+        final error = o as FirebaseException;
+        debugPrint('Error: ${error.code} ${error.message}');
+      };
+    });
+    
     setState(() {});
+ 
+     
   }
 
+  String say(){
+
+    int k=0;
+    for( var i in mesajlar.values){
+      if(!i.isRead) k++;
+      
+    }
+    switch (k) {
+      case 0 :return "" ;
+      case 4 : return"3+";
+        
+    }
+      return k.toString();
+
+  }
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -148,12 +198,12 @@ class _ChatCardState extends State<ChatCard> {
               const SizedBox(
                 height:5
               ),
-              Container(
+            say()==""?Text(""):  Container(
                 height: 20,
                 width: 20,
                 child: Center(
                     child: Text(
-                  "1",
+                  say(),
                   style: GoogleFonts.raleway(
                     color: Colors.white,
                     fontWeight: FontWeight.w400,

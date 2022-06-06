@@ -5,10 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 AppBar profileAppBar=
     AppBar(
-    actions: [
-      IconButton(onPressed: () {},
-          icon: const Icon(FontAwesomeIcons.pen, color: AppColors.purple,))
-    ],
+    // actions: [
+    //   IconButton(onPressed: () {},
+    //       icon: const Icon(FontAwesomeIcons.pen, color: AppColors.purple,))
+    // ],
     backgroundColor: Colors.white,
     leading: const BackButton(color: AppColors.purple,),
     centerTitle: true,

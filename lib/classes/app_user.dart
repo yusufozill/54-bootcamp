@@ -30,7 +30,7 @@ class AppUser {
       required this.bio});
   AppUser.fromMap(Map<dynamic, dynamic> map) {
     if (kDebugMode) {
-      debugPrint("nası ya");
+      debugPrint("App user From map ile oluşturuldu");
     }
     department = map["department"];
     gender = map["gender"];
@@ -142,8 +142,32 @@ class UserMAnagement {
     }
     return allusers;
   }
+  
+  static setupFromUid(String uid) async{
 
- 
+            var database = FirebaseDatabase.instance;
+        UserMAnagement.user = user;
+        UserMAnagement.sender = UserMAnagement.uid = uid;
+        UserMAnagement.username = (await database
+                .ref("uids/${UserMAnagement.uid}")
+                .child("nickname")
+                .get())
+            .value as String;
+        UserMAnagement.sender = UserMAnagement.username;
+        UserMAnagement.appUser = AppUser.fromMap(
+            (await database.ref("Users").child(UserMAnagement.username!).get())
+                .value as Map);
+  }
+   static sinout() async{
+
+        UserMAnagement.user = null;
+        UserMAnagement.sender = null;
+        UserMAnagement.username = null;
+        UserMAnagement.sender = null;
+        UserMAnagement.appUser = null;
+         FirebaseAuth.instance.signOut();
+
+  }
   static Future<AppUser> fromUsername(String username) async {
     final database = FirebaseDatabase.instance;
     var messagesRef =

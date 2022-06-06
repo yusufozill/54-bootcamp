@@ -34,13 +34,17 @@ class _ProfileTabState extends State<ProfileTab> {
     widget.username=UserMAnagement.username;
  
   }
-
+  signin(){
+    setState(() {
+      widget.username= UserMAnagement.username;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFFFF7F7FC),
       //  appBar: profileAppBar,
-        body:  widget.username==null ? Align( alignment: Alignment.topCenter, child: const SignInScreen()): ProfileWidget(username: widget.username!,),
+        body:  widget.username==null ? Align( alignment: Alignment.topCenter, child:  SignInScreen(singin: signin,)): ProfileWidget(username: widget.username!,),
 
     );
   }

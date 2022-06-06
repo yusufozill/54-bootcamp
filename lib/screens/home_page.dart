@@ -6,6 +6,7 @@ import 'package:antello/tabs/explore_tab.dart';
 import 'package:antello/tabs/match_tab.dart';
 import 'package:antello/tabs/profile_tab.dart';
 import 'package:antello/themes/app_colors.dart';
+import 'package:antello/widgets/pp_upload.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -30,20 +31,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     a = FirebaseAuth.instance.authStateChanges().listen((User? user) async {
       if (user == null) {
         debugPrint('User is currently signed out!');
+        
       } else {
-        var database = FirebaseDatabase.instance;
-        UserMAnagement.user = user;
-        UserMAnagement.sender = UserMAnagement.uid = user.uid;
-        UserMAnagement.username = (await database
-                .ref("uids/${UserMAnagement.uid}")
-                .child("nickname")
-                .get())
-            .value as String;
-        UserMAnagement.sender = UserMAnagement.username;
-        UserMAnagement.appUser = AppUser.fromMap(
-            (await database.ref("Users").child(UserMAnagement.username!).get())
-                .value as Map);
+        UserMAnagement.setupFromUid(user.uid);
         debugPrint('User is signed in!');
+        
       }
     });
 
@@ -58,13 +50,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  int tabindex = 1;
+  int tabindex = 3;
   List<Widget> tabs = [
-    const ExploreTab(),
-    //PPUpload(),
+    PPUpload(),
+    //const ExploreTab(),
     const MatchTab(),
     const ChatTab(),
      ProfileTab(),
+
   ];
   @override
   Widget build(BuildContext context) {

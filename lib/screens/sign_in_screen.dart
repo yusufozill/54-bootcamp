@@ -1,3 +1,4 @@
+import 'package:antello/classes/app_user.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/push_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +9,8 @@ import '../widgets/login_widget.dart';
 import '../widgets/sign_up.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  final Function() singin;
+  const SignInScreen({Key? key, required this.singin }) : super(key: key);
 
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -42,9 +44,10 @@ class _SignInScreenState extends State<SignInScreen> {
         //       });
 
         // Navigator.of(context).pushReplacement(
-        navigatorKey.currentState!.popUntil((route) => route.isFirst);
-
+          await UserMAnagement.setupFromUid(user.uid);
+          widget.singin();
         debugPrint('User is signed in!');
+        
       }
     });
 

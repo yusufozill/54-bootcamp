@@ -2,6 +2,8 @@
 
 import 'package:antello/classes/app_user.dart';
 import 'package:antello/classes/match_question_class.dart';
+import 'package:antello/classes/message.dart';
+import 'package:antello/classes/new_user_informations.dart';
 import 'package:antello/themes/app_colors.dart';
 import 'package:antello/widgets/photo_chart.dart';
 import 'package:antello/widgets/purple_button.dart';
@@ -71,13 +73,19 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Expanded(
-                      child: PurpleButton(answer: matchQuestion.first, function: (_x){
-                       cevapla(true);},),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: PurpleButton(answer: matchQuestion.first, function: (_x){
+                         cevapla(true);},),
+                      ),
                     ),
                     Expanded(
-                      child: PurpleButton(answer: matchQuestion.second, function: (_x){
-                        cevapla(false);
-                       },),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: PurpleButton(answer: matchQuestion.second, function: (_x){
+                          cevapla(false);
+                         },),
+                      ),
                     ),
                   ],
                 ),
@@ -91,14 +99,34 @@ class _MatchQuestionWidgetState extends State<MatchQuestionWidget> {
   }
 
   cevapla(bool cevap) async{
-     if(matchQuestion.trueAnswer != cevap) return;
+    
      if(user==null) return;
      var  k = await user!.dialogKur(UserMAnagement.sender!);
                    if(k !=""){
+                     Sohbet newSohbet=Sohbet(chatId:k,giver: user!.nickname,sender: UserMAnagement.sender!);
+                  String  hasan() {
+                    switch (matchQuestion.trueAnswer == cevap) {
+                      case true : return "${user!.nickname} beklediğin cevabı verdi";
+                      case false :return "${user!.nickname} sorun hakkında farklı düşünüyor";
+                        
+    
+                    }
+                    return "${user!.nickname} sorunu cevapladı";
+                  };
+                  String benimcevabim(){
+                    if(matchQuestion.trueAnswer){
+                      return "'"+ matchQuestion.question +"'" +" : '"+ matchQuestion.first+"'";
+                    } else{
+                      return "'"+ matchQuestion.question +"'" +" : '"+ matchQuestion.second+"'";
+
+                    }
+                  }
+                 newSohbet.sendMessage(Message(mesaj: hasan(), time: DateTime.now(), sender:  UserMAnagement.sender!));
+                 newSohbet.sendMessage(Message(mesaj: benimcevabim() , time: DateTime.now(), sender:  UserMAnagement.sender!));
                  Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => ChatScreen(
-              sohbet: Sohbet(chatId:k,giver: user!.nickname,sender: UserMAnagement.sender!),
+              sohbet:newSohbet,
             )));
   }}
 }

@@ -34,6 +34,7 @@ class BottomNavigationWidget extends StatelessWidget {
           BottomNavigationBarItem(
               icon: Icon(Icons.person,),
                label: "Hesap"),
+    
         ]);
   }
 }

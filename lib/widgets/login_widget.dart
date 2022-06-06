@@ -17,7 +17,7 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
   bool isCompleted = false;
-  String? hata;
+  String hata="";
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   @override
@@ -68,6 +68,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
                 obscureText: true,
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(hata, style: TextStyle(color: Colors.red),),
+              ),
+              
               const SizedBox(
                 height: 40,
               ),
@@ -114,7 +119,10 @@ class _LoginWidgetState extends State<LoginWidget> {
           email: emailController.text.trim(),
           password: passwordController.text.trim());
     } on FirebaseAuthException catch (e) {
-      hata = e.toString();
+      hata = e.toString().split("]")[1];
+      setState(() {
+        
+      });
       debugPrint(hata.toString());
     }
 
