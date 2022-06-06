@@ -159,14 +159,14 @@ class UserMAnagement {
             (await database.ref("Users").child(UserMAnagement.username!).get())
                 .value as Map);
   }
-   static sinout() async{
+   static Future sinout() async{
 
         UserMAnagement.user = null;
         UserMAnagement.sender = null;
         UserMAnagement.username = null;
         UserMAnagement.sender = null;
         UserMAnagement.appUser = null;
-         FirebaseAuth.instance.signOut();
+       return  FirebaseAuth.instance.signOut();
 
   }
   static Future<AppUser> fromUsername(String username) async {

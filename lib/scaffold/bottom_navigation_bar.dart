@@ -21,6 +21,7 @@ class BottomNavigationWidget extends StatelessWidget {
           gopage(value);
         },
         currentIndex: currentIndex,
+        
         items:const [
           BottomNavigationBarItem(
             icon:Icon(FontAwesomeIcons.compass,),

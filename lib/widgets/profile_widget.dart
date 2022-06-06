@@ -9,8 +9,9 @@ import '../classes/app_user.dart';
 
 class ProfileWidget extends StatefulWidget {
   final String username;
+  final Function? signin;
   
-  const ProfileWidget({Key? key, required this.username}) : super(key: key);
+  const ProfileWidget({Key? key, required this.username, this.signin}) : super(key: key);
 
   @override
   _ProfileWidgetState createState() => _ProfileWidgetState();
@@ -46,6 +47,21 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             child: Column(
               children: [
                  PhotoChart(appUser:user!.nickname),
+                 
+
+                 TextButton(onPressed: ()async{
+                  await UserMAnagement.sinout().then((value) => print("gfjh"));
+               if(widget.signin!=null){
+                  widget. signin!();
+              
+
+               }
+                   
+                     user=null;
+                 },
+                  child:
+                  widget.username ==UserMAnagement.username?Text(""):
+                   Text("Çıkış Yap", style: TextStyle(color: AppColors.purple, decoration: TextDecoration.underline, fontSize: 15),)),
                 const SizedBox(
                   height: 15,
                 ),
@@ -78,26 +94,36 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
 
-                            
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  
-                                  children: [
+                     
+                          
                             
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text((user!.ad + " " + user!.soyad).toUpperCase() + " • (" +(DateTime.now().difference(user!.birthDate).inDays/365).toInt().toString()+")" , style: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: AppColors.white),),
-                 Text("${user!.gender}".toUpperCase()
-                                    ,
-                                    style: GoogleFonts.raleway(
-                                      color: Colors.white,
-                                    ),)
+                
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text((user!.ad + " " + user!.soyad).toUpperCase() + " • (" +(DateTime.now().difference(user!.birthDate).inDays/365).toInt().toString()+")" , style: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: AppColors.white),),
+                    ),
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Text(user!.gender.toUpperCase()
+                                      ,
+                                      style: GoogleFonts.raleway(
+                                        color: Colors.white,
+                                      ),),
+                 ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                         widget.username !=UserMAnagement.username?  SendMessage(giver:user!.nickname):Text(""),
+
+                                    ],)
+                
                   ],
                 ),
-                    SendMessage(giver:user!.nickname),
 
-                                ],),
+                            
        
                                 Padding(
                                   padding: const EdgeInsets.only(left: 50, right: 50),
@@ -111,18 +137,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       
                                     ),
                                 ),
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 50, right: 50),
-                                  child: Text("Cinsiyet: ${user!.gender}"
-                                    ,
-                                    style: GoogleFonts.raleway(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ), 
+                    
                                 Padding(
                                   padding: const EdgeInsets.only(left: 50, right: 50),
-                                  child: Text("Çalışma Alanı: ${user!.department}"
+                                  child: Text(" ${user!.department}"
                                     ,
                                     style: GoogleFonts.raleway(
                                       color: Colors.white,
@@ -130,16 +148,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   ),
                                 ),
                             
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 50, right: 50),
-                                  child: Text(
-                                    "${user!.birthDate.day}/${user!.birthDate.month}/${user!.birthDate.year}",
-
-                                    style: GoogleFonts.raleway(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
+                          
                               ],
                             ),
                           ),

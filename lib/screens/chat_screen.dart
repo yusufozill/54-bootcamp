@@ -11,7 +11,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/chat_screen_app_bar.dart';
 
-
 class ChatScreen extends StatefulWidget {
   final Sohbet sohbet;
   const ChatScreen({
@@ -109,89 +108,102 @@ class _ChatScreenState extends State<ChatScreen> {
       (DatabaseEvent event) {
         debugPrint('Child added: ${event.snapshot.value}');
 
-
         setState(() {
           messagelist
               .add(Message.fromMap(event.snapshot.value as Map).toWidget());
         });
-       if(!(event.snapshot.key as String).contains(widget.sohbet.sender))
-        {widget.sohbet.markSeen(event.snapshot.key as String);}
+        if (!(event.snapshot.key as String).contains(widget.sohbet.sender)) {
+          widget.sohbet.markSeen(event.snapshot.key as String);
+        }
       },
       onError: (Object o) {
         final error = o as FirebaseException;
         debugPrint('Error: ${error.code} ${error.message}');
       },
     );
-  
-  
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: ChatScreenAppBar(widget.sohbet.giver),
-        body: Align(
-          alignment: Alignment.bottomCenter,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      reverse: true,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: messagelist,
+        body: SafeArea(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        reverse: true,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: messagelist,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    color:Colors.white ,
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        IconButton(onPressed:(){}, icon:const Icon(FontAwesomeIcons.plus,color:AppColors.purple,)),
-                        Expanded(
-                            child: Container(
-                              color:const Color(0xFFF7F7FC),
-                              child: TextFormField(
-                                cursorColor:AppColors.purple,
-                          decoration: const InputDecoration(border:InputBorder.none,),
-                          keyboardType: TextInputType.text,
-                          maxLines: 5,
-                          minLines: 1,
-                          controller: mesajcontroller,
-                        ),
-                            )),
-                        IconButton(
-                            onPressed: () {
-                              
-                                if(mesajcontroller.text == "") return;
-                              widget.sohbet.sendMessage(Message(
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                FontAwesomeIcons.plus,
+                                color: AppColors.purple,
+                              )),
+                          Expanded(
+                              child: Container(
+                            color: const Color(0xFFF7F7FC),
+                            child: TextFormField(
+                              cursorColor: AppColors.purple,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                              ),
+                              keyboardType: TextInputType.text,
+                              maxLines: 5,
+                              minLines: 1,
+                              controller: mesajcontroller,
+                            ),
+                          )),
+                          IconButton(
+                              onPressed: () {
+                                if (mesajcontroller.text == "") return;
+                                widget.sohbet.sendMessage(Message(
                                   mesaj: mesajcontroller.text,
                                   time: DateTime.now(),
                                   sender: widget.sohbet.sender,
-                                  ));
+                                ));
 
-
-                              mesajcontroller.text = "";
-                              setState(() {});
-                            },
-                            icon: const Icon(Icons.send,color: AppColors.purple,))
-                      ],
+                                mesajcontroller.text = "";
+                                setState(() {});
+                              },
+                              icon: const Icon(
+                                Icons.send,
+                                color: AppColors.purple,
+                              ))
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-             Align(alignment: Alignment.topLeft, child: Padding(
-               padding: const EdgeInsets.all(8.0),
-               child: Text(widget.sohbet.giver, style:GoogleFonts.comfortaa(
-      fontSize:23,
-      fontWeight:FontWeight.bold,
-    ) ,),
-             )),
-             ],
+                  ],
+                ),
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        widget.sohbet.giver,
+                        style: GoogleFonts.comfortaa(
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )),
+              ],
+            ),
           ),
         ));
   }

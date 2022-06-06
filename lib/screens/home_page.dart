@@ -29,6 +29,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     // TODO: implement initState
 
     controller = TabController(length: 4, vsync: this,initialIndex: tabindex);
+    controller.addListener(() {
+     print("object");
+     tabindex=  controller.index;
+     setState(() {
+       
+     });
+     });
     a = FirebaseAuth.instance.authStateChanges().listen((User? user) async {
       if (user == null) {
         debugPrint('User is currently signed out!');
